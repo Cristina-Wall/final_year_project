@@ -5,13 +5,13 @@ from mido import MidiFile, MidiTrack
 import random
         
 
-def select_next_note(input_notes):
+def select_next_note(input_notes, curr_note):
     rand_val = random.random()
     total = 0
-    for curr_note, probs in input_notes[1].items():
+    for next_note, probs in input_notes[curr_note][1].items():
         total += probs
         if rand_val <= total:
-            return curr_note
+            return next_note
 
 
 tune1 = []
@@ -98,19 +98,15 @@ curr_note = 59  # starting note
 length = 500  # length of song in notes
 next_note_temp = 0
 
-# for i in range(10000):
-#     # Add the note to the MIDI file
-#     track.append(mido.Message('note_on', note=curr_note, velocity=velocity, time=time))
-#     track.append(mido.Message('note_off', note=curr_note, velocity=velocity, time=(duration + time)))
-#     time += duration
+for i in range(10000):
+    # Add the note to the MIDI file
+    track.append(mido.Message('note_on', note=curr_note, velocity=velocity, time=time))
+    track.append(mido.Message('note_off', note=curr_note, velocity=velocity, time=(duration + time)))
+    time += duration
 
-#     # Generate the next note based on the probabilities
-#     print("curr_note before: ", curr_note)
-#     print("next_note before: ", next_note_temp)
-#     next_note_temp = select_next_note(sorted_probabilities[curr_note])
-#     curr_note = next_note_temp
-#     print("curr_note after: ", curr_note)
-#     print("next_note after: ", next_note_temp)
+    # Generate the next note based on the probabilities
+    next_note_temp = select_next_note(sorted_probabilities, curr_note % len(sorted_probabilities))
+    curr_note = next_note_temp
 
 # Save the MIDI file
 # midi_file.save("output/output_markov2.mid")
