@@ -3,7 +3,7 @@ import copy
 import mido
 from mido import MidiFile, MidiTrack
 import random
-        
+
 
 def select_next_note(input_notes, curr_note):
     rand_val = random.random()
@@ -98,10 +98,10 @@ curr_note = 59  # starting note
 length = 500  # length of song in notes
 next_note_temp = 0
 
-for i in range(10000):
+for i in range(1000):
     # Add the note to the MIDI file
     track.append(mido.Message('note_on', note=curr_note, velocity=velocity, time=time))
-    track.append(mido.Message('note_off', note=curr_note, velocity=velocity, time=(duration + time)))
+    track.append(mido.Message('note_off', note=curr_note, velocity=velocity, time=time+duration))
     time += duration
 
     # Generate the next note based on the probabilities
@@ -109,5 +109,5 @@ for i in range(10000):
     curr_note = next_note_temp
 
 # Save the MIDI file
-# midi_file.save("output/output_markov2.mid")
-# print(midi_file)
+midi_file.save("output/output_markov7.mid")
+print(midi_file)
