@@ -111,8 +111,8 @@ num_notes = 128
 
 # create a dictionary to store the probabilities
 probabilities = {}
-probabilities_array = [[0]*num_notes]*num_notes
-normalised_probabilities = [[0]*num_notes]*num_notes
+probabilities_array = [[0] * num_notes for _ in range(num_notes)]
+normalised_probabilities = [[0] * num_notes for _ in range(num_notes)]
 
 for i in range(len(states)):
     for j in range(len(states)):
@@ -132,15 +132,10 @@ for tune in all_tunes:
             break
 
 # calculate the probabilities by dividing the counts by the total occurrences of each note
-for i in range(len(probabilities_array)):
-    for j in range(len(probabilities_array[i])):
-        normalised_probabilities[i][j] = (1 + (probabilities_note_count[i][j]) / (num_notes + total_notes_in_tunes))
-
-
-f = open("output4.txt", "a")
-print(normalised_probabilities, file=f)
-f.close()
-
+for i in range(len(probabilities_note_count)):
+    for j in range(len(probabilities_note_count[i])):
+        normalised_probabilities[i][j] = (1 + probabilities_note_count[i][j]) / (num_notes + total_notes_in_tunes)
+        
 # order the probabilities by the current_note
 sorted_probabilities = sorted(probabilities.items(), key=lambda x: x[0])
 
