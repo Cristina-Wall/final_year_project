@@ -12,8 +12,6 @@ def select_next_note(input_notes, curr_note):
     cumulative_probabilities = [sum(probability_distribution[:idx+1]) for idx in range(len(probability_distribution))]
     random_value = random.uniform(0, 1)
 
-    print(random_value)
-
     # Find the index where the random_value falls in the cumulative probabilities
     for idx, cumulative_prob in enumerate(cumulative_probabilities):
         if random_value <= cumulative_prob:
@@ -136,12 +134,9 @@ for tune in all_tunes:
             break
 
 # calculate the probabilities by dividing the counts by the total occurrences of each note
-# for i in range(len(probabilities_note_count)):
-#     for j in range(len(probabilities_note_count[i])):
-#         normalised_probabilities[i][j] = (1 + probabilities_note_count[i][j]) / (num_notes + total_notes_in_tunes)
 for i in range(len(probabilities_note_count)):
     for j in range(len(probabilities_note_count[i])):
-        normalised_probabilities[i][j] = (1 + probabilities_note_count[i][j]) / (len(probabilities_note_count[i]) + sum(probabilities_note_count[i]))
+        normalised_probabilities[i][j] = (1 + (probabilities_note_count[i][j] * 3)) / (len(probabilities_note_count[i]) + (sum(probabilities_note_count[i]) * 3))
 
 # Create a MIDI file
 midi_file = MidiFile()
@@ -152,7 +147,7 @@ midi_file.tracks.append(track)
 # track.append(mido.MetaMessage('set_tempo', tempo=500000, time=0))
 
 # Set the duration and velocity for each note
-duration = 5  # in beats
+duration = 100  # in beats
 velocity = 100  # 0-127
 time = 0  # current time in tune
 curr_note = 59  # starting note
@@ -162,21 +157,20 @@ next_note_temp = 0
 channel = 0
 pitch = 0
 
-next_note_temp = select_next_note(normalised_probabilities, curr_note)
-print(next_note_temp)
+track.append(mido.MetaMessage('set_tempo', tempo=120, time=0))
 
-# for i in range(1000):
-#     # Add the note to the MIDI file
-#     track.append(mido.Message('note_on', note=curr_note, velocity=velocity, time=time))
-#     track.append(mido.Message('note_off', note=curr_note, velocity=velocity, time=time+duration))
-#     time += duration
+for i in range(500):
+    # Add the note to the MIDI file
+    track.append(mido.Message('note_on', note=curr_note, velocity=velocity, time=time))
+    track.append(mido.Message('note_off', note=curr_note, velocity=velocity, time=time+duration))
+    time += duration
     
-#     # midi_file.addNote(channel, i, pitch+i, duration, 100)
+    # midi_file.addNote(channel, i, pitch+i, duration, 100)
 
-#     # Generate the next note based on the probabilities
-#     next_note_temp = select_next_note(normalised_probabilities, curr_note)
-#     curr_note = next_note_temp
+    # Generate the next note based on the probabilities
+    next_note_temp = select_next_note(normalised_probabilities, curr_note)
+    curr_note = next_note_temp
 
 # Save the MIDI file
-# midi_file.save("output/output_markov20.mid")
-# print(midi_file)
+midi_file.save("output/output_markov28.mid")
+print(midi_file)
