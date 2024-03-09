@@ -3,6 +3,7 @@ import copy
 import mido
 from mido import MidiFile, MidiTrack
 import random
+import os
 
 total_notes_in_tunes = 0
 
@@ -60,52 +61,27 @@ def get_notes_from_file(file_name):
     output = [item for sublist in output for item in sublist]
     return output, total_notes
 
+def get_file_names(directory):
+    file_names = []
+    for filename in os.listdir(directory):
+        if os.path.isfile(os.path.join(directory, filename)):
+            file_names.append(directory + "/" + filename)
+    return file_names
+
+# directory_path = "midiFiles/maestro-v3.0.0/2004"
+directory_path = "midiFiles/one_note_melodies"
+file_names = get_file_names(directory_path)
 
 all_tunes = []
 
 # import all the midi files
-mid1 = import_file("midiFiles/one_note_melodies/gravity_falls.mid")
+# mid1 = import_file("midiFiles/one_note_melodies/gravity_falls.mid")
 
-# add all the tunes to the one list of lists
-tune, total_notes = get_notes_from_file("midiFiles/one_note_melodies/gravity_falls.mid")
-all_tunes.append(copy.copy(tune))
-total_notes_in_tunes += total_notes
-tune, total_notes = get_notes_from_file("midiFiles/one_note_melodies/howls_moving_castle.mid")
-all_tunes.append(copy.copy(tune))
-total_notes_in_tunes += total_notes
-tune, total_notes = get_notes_from_file("midiFiles/one_note_melodies/beauty_and_the_beast.mid")
-all_tunes.append(copy.copy(tune))
-total_notes_in_tunes += total_notes
-tune, total_notes = get_notes_from_file("midiFiles/one_note_melodies/cant_help_falling_in_love.mid")
-all_tunes.append(copy.copy(tune))
-total_notes_in_tunes += total_notes
-tune, total_notes = get_notes_from_file("midiFiles/one_note_melodies/happy_birthday.mid")
-all_tunes.append(copy.copy(tune))
-total_notes_in_tunes += total_notes
-tune, total_notes = get_notes_from_file("midiFiles/one_note_melodies/hedwigs_theme.mid")
-all_tunes.append(copy.copy(tune))
-total_notes_in_tunes += total_notes
-tune, total_notes = get_notes_from_file("midiFiles/one_note_melodies/la_vie_en_rose.mid")
-all_tunes.append(copy.copy(tune))
-total_notes_in_tunes += total_notes
-tune, total_notes = get_notes_from_file("midiFiles/one_note_melodies/pink_panther.mid")
-all_tunes.append(copy.copy(tune))
-total_notes_in_tunes += total_notes
-tune, total_notes = get_notes_from_file("midiFiles/one_note_melodies/tetris.mid")
-all_tunes.append(copy.copy(tune))
-total_notes_in_tunes += total_notes
-tune, total_notes = get_notes_from_file("midiFiles/one_note_melodies/twinkle_twinkle.mid")
-all_tunes.append(copy.copy(tune))
-total_notes_in_tunes += total_notes
-tune, total_notes = get_notes_from_file("midiFiles/one_note_melodies/you_are_my_sunshine.mid")
-all_tunes.append(copy.copy(tune))
-total_notes_in_tunes += total_notes
-tune, total_notes = get_notes_from_file("midiFiles/one_note_melodies/youve_got_a_friend_in_me.mid")
-all_tunes.append(copy.copy(tune))
-total_notes_in_tunes += total_notes
-tune, total_notes = get_notes_from_file("midiFiles/one_note_melodies/you_belong_with_me.mid")
-all_tunes.append(copy.copy(tune))
-total_notes_in_tunes += total_notes
+# get all the notes from each of the files
+for i in range(len(file_names)):
+    tune, total_notes = get_notes_from_file(file_names[i])
+    all_tunes.append(copy.copy(tune))
+    total_notes_in_tunes += total_notes
 
 # states are all the possible notes on the piano
 states = list(range(0, 128))
@@ -172,5 +148,5 @@ for i in range(500):
     curr_note = next_note_temp
 
 # Save the MIDI file
-midi_file.save("output/output_markov28.mid")
-print(midi_file)
+# midi_file.save("output/output_markov28.mid")
+# print(midi_file)
