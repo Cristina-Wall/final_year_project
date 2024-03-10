@@ -20,52 +20,98 @@
                 <div class="h1">AI Music Generator</div>
             </div>
         </div>
-        <div class="header-image">
+        <div class="header-image" id="header-image">
             <img class="img" src="images/guitars.jpg" alt="header-image">
         </div>
     </header>
     <div class="main-body" id="main-body">
         <div class="content">
             <div class="banner" id="banner">Scroll to Generate</div>
-            <div class="param-header">Choose your parameters:</div>
             <div class="param-container">
                 <div class="param">Instrument:<br>
-                    <!-- <select>
-                        <option value="piano">Piano</option>
-                        <option value="guitar">Guitar</option>
-                        <option value="drums">Drums</option>
-                    </select> -->
-                    <table>
-                        <tr>
-                            <td>Piano img</td>
-                            <td>Flute img</td>
-                        </tr>
-                        <tr>
-                            <td>Saxophone img</td>
-                            <td>Xylophone img</td>
-                        </tr>
-                    </table>
+                    <div class="instruments">
+                        <div class="item" id="piano" onclick="choose_instrument('piano')">
+                            <img class="img instrument" src="images/piano.png" alt="Piano">
+                            <div class="hover-items">
+                                Piano
+                            </div>
+                        </div>
+                        <div class="item" id="clarinet" onclick="choose_instrument('clarinet')">
+                            <img class="img instrument" src="images/clarinet.png" alt="Clarinet">
+                            <div class="hover-items">
+                                Clarinet
+                            </div>
+                        </div>
+                        <div class="item" id="ac_guitar" onclick="choose_instrument('ac_guitar')">
+                            <img class="img instrument" src="images/ac_guitar.png" alt="Acoustic Guitar">
+                            <div class="hover-items">
+                                Acoustic Guitar
+                            </div>
+                        </div>
+                        <div class="item" id="flute" onclick="choose_instrument('flute')">
+                            <img class="img instrument" src="images/flute.png" alt="Flute">
+                            <div class="hover-items">
+                                Flute
+                            </div>
+                        </div>
+                        <div class="item" id="xylophone" onclick="choose_instrument('xylophone')">
+                            <img class="img instrument" src="images/xylophone.png" alt="Xylohphone">
+                            <div class="hover-items">
+                                Xylohphone
+                            </div>
+                        </div>
+                        <div class="item" id="elec_guitar" onclick="choose_instrument('elec_guitar')">
+                            <img class="img instrument" src="images/elec_guitar.png" alt="Electric Guitar">
+                            <div class="hover-items">
+                                Electric Guitar
+                            </div>
+                        </div>
+                        <div class="item" id="saxophone" onclick="choose_instrument('saxophone')">
+                            <img class="img instrument" src="images/saxophone.png" alt="Saxophone">
+                            <div class="hover-items">
+                                Saxophone
+                            </div>
+                        </div>
+                        <div class="item" id="trumpet" onclick="choose_instrument('trumpet')">
+                            <img class="img instrument" src="images/trumpet.png" alt="Trumpet">
+                            <div class="hover-items">
+                                Trumpet
+                            </div>
+                        </div>
+                        <div class="item" id="violin" onclick="choose_instrument('violin')">
+                            <img class="img instrument" src="images/violin.png" alt="Violin">
+                            <div class="hover-items">
+                                Violin
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="param">Tonality:<br>
-                    <select>
-                        <option value="piano">Major</option>
-                        <option value="guitar">Minor</option>
-                    </select>
+                <div class="param">
+                    <div class="param-header">Tonality:</div>
+                    <div class="tonality-opts" onclick="choose_tonality('major'); document.getElementById('text_minor').style.color='#000'; document.getElementById('text_major').style.color='#F68E5F';">
+                        <div class="item" id="text_major">Major</div>
+                    </div>
+                    <div class="tonality-opts" onclick="choose_tonality('minor'); document.getElementById('text_major').style.color='#000'; document.getElementById('text_minor').style.color='#F68E5F';">
+                        <div class="item" id="text_minor">Minor</div>
+                    </div>
                 </div>
-                <div class="param">Tempo (between 60 and 240 bpm):<br>
-                    <input type="number" min="60" max="240">
+                <div class="param">
+                    <div class="tempo-heading">Tempo (between 60 and 240 bpm):</div>
+                    <div class="tempo-param">
+                        <input class="tempo-slider" id="tempo-slider" type="range" min='60' max='240' step='1' />
+                        <span class="slider-text" id="slider-text">150</span>
+                    </div>
                 </div>
-                <div class="param">Length (mins):<br>
-                    <input type="number" min="0.5" max="10">
+                <div class="param">
+                    <div class="length-param">
+                        <div class="param-heading">Length (mins):</div>
+                        <input class="length-input" id="length-input" type="number" min="0.5" max="10" step="0.5">
+                    </div>
                 </div>
             </div>
-            <br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id nibh tortor id aliquet. Amet massa vitae tortor condimentum. Augue mauris augue neque gravida in fermentum et sollicitudin ac. Elementum curabitur vitae nunc sed velit dignissim sodales ut. Sit amet venenatis urna cursus eget. Mauris vitae ultricies leo integer. Est sit amet facilisis magna. Sed elementum tempus egestas sed sed risus pretium quam. Sed elementum tempus egestas sed sed risus pretium. Venenatis a condimentum vitae sapien pellentesque habitant morbi tristique. Egestas diam in arcu cursus euismod quis viverra.
-            <br><br>Purus gravida quis blandit turpis cursus in hac habitasse. Massa eget egestas purus viverra accumsan in nisl. Amet justo donec enim diam vulputate ut pharetra sit. Purus non enim praesent elementum. Ac tincidunt vitae semper quis. Urna nunc id cursus metus aliquam eleifend mi. Tincidunt tortor aliquam nulla facilisi. Tempor commodo ullamcorper a lacus vestibulum sed. Faucibus interdum posuere lorem ipsum dolor. Purus non enim praesent elementum facilisis. Mauris commodo quis imperdiet massa tincidunt nunc. Ultricies mi eget mauris pharetra. Suspendisse in est ante in. Pellentesque adipiscing commodo elit at imperdiet dui. Sem fringilla ut morbi tincidunt augue. Commodo nulla facilisi nullam vehicula ipsum. Consectetur lorem donec massa sapien faucibus et molestie ac feugiat. Duis ultricies lacus sed turpis tincidunt id aliquet. Nunc vel risus commodo viverra maecenas.
-            <br><br>Dolor sed viverra ipsum nunc aliquet bibendum. Fringilla urna porttitor rhoncus dolor purus non enim. Molestie at elementum eu facilisis sed odio morbi. Sed adipiscing diam donec adipiscing tristique. Tellus rutrum tellus pellentesque eu tincidunt. Egestas tellus rutrum tellus pellentesque eu tincidunt. Mus mauris vitae ultricies leo. Turpis egestas pretium aenean pharetra magna. Sit amet mauris commodo quis imperdiet massa tincidunt nunc. Facilisis mauris sit amet massa vitae tortor. Dui accumsan sit amet nulla facilisi morbi tempus. Mauris vitae ultricies leo integer malesuada. Cursus in hac habitasse platea dictumst. Sed viverra ipsum nunc aliquet bibendum enim. Blandit aliquam etiam erat velit scelerisque in. Vulputate eu scelerisque felis imperdiet proin fermentum leo vel orci.
-            <br><br>Sagittis id consectetur purus ut faucibus pulvinar elementum integer enim. Sem fringilla ut morbi tincidunt augue interdum velit euismod in. Viverra nibh cras pulvinar mattis. Tellus pellentesque eu tincidunt tortor. Sed turpis tincidunt id aliquet risus feugiat in. Volutpat odio facilisis mauris sit amet massa. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Viverra tellus in hac habitasse platea. Pellentesque habitant morbi tristique senectus et netus. Molestie at elementum eu facilisis sed odio morbi. Lorem ipsum dolor sit amet. Dolor morbi non arcu risus quis varius quam quisque id.
-            <br><br>Suscipit adipiscing bibendum est ultricies integer quis auctor. Nulla facilisi nullam vehicula ipsum. Potenti nullam ac tortor vitae purus faucibus. Adipiscing at in tellus integer feugiat scelerisque varius morbi. Ac auctor augue mauris augue neque gravida in fermentum et. Sed viverra ipsum nunc aliquet bibendum enim. Scelerisque eleifend donec pretium vulputate sapien nec sagittis aliquam. Consectetur lorem donec massa sapien faucibus. Pharetra vel turpis nunc eget lorem dolor sed viverra ipsum. Lectus proin nibh nisl condimentum id venenatis a. Nec feugiat in fermentum posuere urna nec tincidunt. Vitae et leo duis ut. Pretium aenean pharetra magna ac placerat vestibulum. Mattis molestie a iaculis at.
-            <br><br>Posuere morbi leo urna molestie at elementum eu facilisis. Pellentesque eu tincidunt tortor aliquam nulla facilisi cras. Ultricies mi eget mauris pharetra et ultrices neque ornare aenean. Elementum nibh tellus molestie nunc non blandit. Ut aliquam purus sit amet luctus. Vitae auctor eu augue ut lectus arcu bibendum. Nascetur ridiculus mus mauris vitae. Turpis massa sed elementum tempus. Velit euismod in pellentesque massa placerat duis ultricies lacus sed. Nulla at volutpat diam ut venenatis tellus. Hac habitasse platea dictumst quisque sagittis purus sit amet volutpat. Dolor sit amet consectetur adipiscing elit duis tristique sollicitudin nibh.
-            <br><br>Massa enim nec dui nunc mattis enim ut tellus. Convallis tellus id interdum velit laoreet id. Blandit volutpat maecenas volutpat blandit aliquam etiam. Pulvinar elementum integer enim neque volutpat ac tincidunt vitae. Imperdiet nulla malesuada pellentesque elit eget. Dictum fusce ut placerat orci nulla pellentesque. Ac felis donec et odio pellentesque diam. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. Urna nunc id cursus metus aliquam eleifend mi. At tempor commodo ullamcorper a lacus vestibulum sed arcu non. Sagittis orci a scelerisque purus semper eget duis. Massa tempor nec feugiat nisl. Commodo quis imperdiet massa tincidunt nunc pulvinar. Eu turpis egestas pretium aenean pharetra. Egestas diam in arcu cursus euismod quis viverra nibh cras. Porttitor eget dolor morbi non arcu risus quis varius. Magna ac placerat vestibulum lectus mauris ultrices eros. Lacus luctus accumsan tortor posuere. Ipsum consequat nisl vel pretium lectus quam. Ac odio tempor orci dapibus ultrices in iaculis nunc sed.
+            <div class="generate-button-container">
+                <button class="generate-button" onclick="send_parameters();">Generate Song!</button>
+            </div> 
         </div>
     </div>
     <footer class="footer-container">
@@ -74,5 +120,16 @@
         </div>
     </footer>
     <script type="text/javascript" src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+	<script type="text/javascript">
+        // Function to change the tempo value on the slider
+		$(function(){
+            $('.tempo-param .tempo-slider').on('mousemove', function(){
+                var getValRange = $(this).val();
+                $('.tempo-param .slider-text').text(getValRange);
+            });
+		});
+	</script>
 </body>
 </html>
