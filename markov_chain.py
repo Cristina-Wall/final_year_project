@@ -1,14 +1,16 @@
 from random import randint
 import copy
+import datetime
 import mido
 from mido import MidiFile, MidiTrack
 import random
 import os
 
 total_notes_in_tunes = 0
+# get start time
+start_time = datetime.datetime.now()
 
-
-def select_next_note(input_notes, curr_note):
+def select_next_note(input_notes, curr_note, notes_allowed):
     probability_distribution = copy.copy(input_notes[curr_note])
     cumulative_probabilities = [sum(probability_distribution[:idx+1]) for idx in range(len(probability_distribution))]
     random_value = random.uniform(0, 1)
@@ -16,7 +18,10 @@ def select_next_note(input_notes, curr_note):
     # Find the index where the random_value falls in the cumulative probabilities
     for idx, cumulative_prob in enumerate(cumulative_probabilities):
         if random_value <= cumulative_prob:
-            return idx
+            if idx in notes_allowed:
+                return idx
+            else:
+                select_next_note(input_notes, curr_note, notes_allowed)
 
 
 def import_file(file_name):
@@ -63,9 +68,10 @@ def get_notes_from_file(file_name):
 
 def get_file_names(directory):
     file_names = []
-    for filename in os.listdir(directory):
-        if os.path.isfile(os.path.join(directory, filename)):
-            file_names.append(directory + "/" + filename)
+    for directory in directory:
+        for filename in os.listdir(directory):
+            if os.path.isfile(os.path.join(directory, filename)):
+                file_names.append(directory + "/" + filename)
     return file_names
 
 def make_scale_of_c():
@@ -188,7 +194,7 @@ def make_scale(key, scale_of_c):
             removed += 1
     return scale
 
-directory_path = "midiFiles/maestro-v3.0.0/2004"
+directory_path = ["midiFiles/maestro-v3.0.0/2004", "midiFiles/maestro-v3.0.0/2006", "midiFiles/maestro-v3.0.0/2008", "midiFiles/maestro-v3.0.0/2009", "midiFiles/maestro-v3.0.0/2011", "midiFiles/maestro-v3.0.0/2013", "midiFiles/maestro-v3.0.0/2014", "midiFiles/maestro-v3.0.0/2015", "midiFiles/maestro-v3.0.0/2017", "midiFiles/maestro-v3.0.0/2018"]
 # directory_path = "midiFiles/one_note_melodies"
 file_names = get_file_names(directory_path)
 
@@ -270,7 +276,7 @@ for i in range(500):
 
 # print(normalised_probabilities)
 # Save the MIDI file
-# midi_file.save("output/output_markov_dataset04_01.mid")
+midi_file.save("output/output_markov_dataset_01.mid")
 # print(midi_file)
 
 # writing to file
@@ -278,3 +284,8 @@ for i in range(500):
 # for i in range(len(normalised_probabilities)):
 #     file1.write(str(normalised_probabilities[i]) + "\n")
 # file1.close()
+
+# get end time
+end_time = datetime.datetime.now()
+# print the time taken to run the program
+print(end_time - start_time)
