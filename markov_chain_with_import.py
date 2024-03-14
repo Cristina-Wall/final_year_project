@@ -5,18 +5,19 @@ import mido
 from mido import MidiFile, MidiTrack
 import random
 import ast
+import math
 
 ####################
 # Before the run these are all the parameters that can be set
 save_to_file = "output/12_03_14.mid" # the name and location of the file the song will be saved to
-duration = 200  # in beats - the length of each note
+duration = 50  # in beats - the length of each note
 velocity = 100  # the strength of each note (dynamics)
 curr_note = 59  # starting note (middle C)
-length = 500000  # length of song in notes
+length = 500  # length of song in notes
 chosen_key = "c" # key the song will be in
 chosen_tonality = "major" # tonality of the song
 num_past_notes = 1 # number of past notes to base the probabilities on
-tempo = 120 # tempo of the song
+tempo = 500000 # tempo of the song
 # length of song in seconds????
 # instrument????
 ####################
@@ -41,6 +42,8 @@ def select_next_note(input_notes, curr_note, notes_allowed):
 
 # Similar to function above but this uses the probabilities based on the two previous notes
 def select_next_note_from_two(input_notes, curr_note, prev_note, notes_allowed, num_notes):
+    if(prev_note == 127):
+        prev_note = 60 # do something about this!!! this is here because when prev_note is 127, the index is too high and it doesnt actually exist
     while True:
         probability_distribution = copy.copy(input_notes[(prev_note * num_notes) + prev_note + curr_note])
         cumulative_probabilities = [sum(probability_distribution[:idx+1]) for idx in range(len(probability_distribution))]
@@ -232,20 +235,23 @@ print("time taken to create midi and get allowed notes and scales: ", time3 - ti
 # print("time taken to get key and create scale: ", time7 - time6)
 
 track.append(mido.MetaMessage('set_tempo', tempo=tempo, time=0))
-mido.set_tempo(tempo=468750 time=0)
 
 for i in range(length):
     # Add the note to the MIDI file
     track.append(mido.Message('note_on', note=curr_note, velocity=velocity, time=time))
     track.append(mido.Message('note_off', note=curr_note, velocity=velocity, time=time+duration))
+
     time += duration
-    print("duration: ", duration)
-    print("time: ", time)
+    time = math.floor(math.sqrt(time))
+
     # duration = choose_timing()
     # Generate the next note based on the probabilities
-    next_note_temp = select_next_note(normalised_probabilities, curr_note, notes_allowed)
-    # next_note_temp = select_next_note_from_two(normalised_probabilities, curr_note, prev_note, notes_allowed, num_notes)
+    # next_note_temp = select_next_note(normalised_probabilities, curr_note, notes_allowed)
+    next_note_temp = select_next_note_from_two(normalised_probabilities, curr_note, prev_note, notes_allowed, num_notes)
     # next_note_temp = select_next_note_from_three(normalised_probabilities, curr_note, prev_note, prev_prev_note, notes_allowed, num_notes)
+
+    # prev_prev_note = prev_note
+    prev_note = curr_note
     curr_note = next_note_temp
 
 time4 = datetime.datetime.now()
