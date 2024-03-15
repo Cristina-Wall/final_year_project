@@ -10,7 +10,7 @@ import math
 
 ####################
 # Before the run these are all the parameters that can be set
-save_to_file = "output/14_03_30_large_twonotes.mid" # the name and location of the file the song will be saved to
+save_to_file = "output/15_03_04.mid" # the name and location of the file the song will be saved to
 duration = 50  # in beats - the length of each note
 velocity = 100  # the strength of each note (dynamics)
 curr_note = 59  # starting note (middle C)
@@ -44,10 +44,11 @@ def select_next_note(input_notes, curr_note, notes_allowed):
 
 # Similar to function above but this uses the probabilities based on the two previous notes
 def select_next_note_from_two(input_notes, curr_note, prev_note, notes_allowed, num_notes):
-    if(prev_note == 127):
-        prev_note = 60 # do something about this!!! this is here because when prev_note is 127, the index is too high and it doesnt actually exist
+    # if(prev_note == 127):
+    #     prev_note = 60 # do something about this!!! this is here because when prev_note is 127, the index is too high and it doesnt actually exist
     while True:
-        probability_distribution = copy.copy(input_notes[(prev_note * num_notes) + prev_note + curr_note])
+        # probability_distribution = copy.copy(input_notes[(prev_note * num_notes) + prev_note + curr_note])
+        probability_distribution = copy.copy(input_notes[((num_notes * prev_note)) + curr_note])
         cumulative_probabilities = [sum(probability_distribution[:idx+1]) for idx in range(len(probability_distribution))]
         random_value = random.uniform(0, 1)
 
@@ -108,7 +109,7 @@ def get_notes_from_file(file_name):
 
         mem2=[]
 
-        if i['type'] == 'note_on':
+        if i['type'] == 'note_on' and i['note'] >= 24 and i['note'] < 108:
             mem2.append(i['note'])
             output.append(mem2)
             total_notes += 1
@@ -149,7 +150,7 @@ def get_allowed_notes(key, tonality):
 def make_scale_of_major_c():
     scale = []
     # The scale of C is made up of notes number 0, 2, 4, 5, 7, 9, 11 in every octave
-    for x in range(128):
+    for x in range(84):
         if x % 12 == 0:
             scale.append(x)
         elif x % 12 == 2:
@@ -171,7 +172,7 @@ def make_scale_of_major_c():
 def make_scale_of_minor_c():
     scale = []
     # The scale of C is made up of notes number 0, 2, 3, 5, 7, 8, 11 in every octave
-    for x in range(128):
+    for x in range(84):
         if x % 12 == 0:
             scale.append(x)
         elif x % 12 == 2:
@@ -231,7 +232,7 @@ def make_scale(key, scale_of_c):
     
     # Remove any notes that are above 128
     for i in range(len(scale) - removed):
-        if scale[i - removed] > 128:
+        if scale[i - removed] > 84:
             scale.remove(scale[i - removed])
             removed += 1
     return scale
@@ -249,7 +250,7 @@ def count_notes_for_probs(states, num_notes, probabilities_array, all_tunes, pro
     for i in range(len(states)):
         for j in range(num_notes):
             probabilities_array[i][j] = 100 / len(states) / 100 / num_notes
-    
+
     if num_past_notes == 1:
         for tune in all_tunes:
             for i in range(len(tune)):
@@ -257,7 +258,9 @@ def count_notes_for_probs(states, num_notes, probabilities_array, all_tunes, pro
 
                 if i < len(tune) - 1:
                     next_note = tune[i + 1]
-                    probabilities_note_count[current_note - 1][next_note - 1] += 1
+                    next_note -= 24
+                    current_note -= 24
+                    probabilities_note_count[current_note][next_note] += 1
                 else:
                     return probabilities_array, probabilities_note_count
     elif num_past_notes == 2:
@@ -268,7 +271,10 @@ def count_notes_for_probs(states, num_notes, probabilities_array, all_tunes, pro
                 if i < len(tune) - 2:
                     next_note = tune[i + 1]
                     next_next_note = tune[i + 2]
-                    probabilities_note_count[(current_note * num_notes) + current_note + next_note - 1][next_next_note - 1] += 1
+                    current_note -= 24
+                    next_note -= 24
+                    next_next_note -= 24
+                    probabilities_note_count[(current_note * num_notes) + current_note + next_note][next_next_note] += 1
                 else:
                     return probabilities_array, probabilities_note_count
     elif num_past_notes == 3:
@@ -280,7 +286,11 @@ def count_notes_for_probs(states, num_notes, probabilities_array, all_tunes, pro
                     next_note = tune[i + 1]
                     next_next_note = tune[i + 2]
                     next_next_next_note = tune[i + 3]
-                    probabilities_note_count[(current_note * num_notes) + (next_note * num_notes) + next_next_note + current_note + next_note - 1][next_next_next_note - 1] += 1
+                    current_note -= 24
+                    next_note -= 24
+                    next_next_note -= 24
+                    next_next_next_note -= 24
+                    probabilities_note_count[(current_note * num_notes) + (next_note * num_notes) + next_next_note + current_note + next_note][next_next_next_note] += 1
                 else:
                     return probabilities_array, probabilities_note_count
     return probabilities_array, probabilities_note_count
@@ -294,6 +304,9 @@ def calculate_norm_probs(probabilities_note_count, probabilities_array, normalis
 
 def choose_timing():
     return randint(60, 240)
+
+def find_chord(note):
+    return 0
 
 time1 = datetime.datetime.now()
 print("time taken before anything started: ", time1 - start_time)
@@ -316,7 +329,7 @@ time3 = datetime.datetime.now()
 print("time taken to read notes from files: ", time3 - time2)
 
 # num_notes are all the possible notes on the piano
-num_notes = 128
+num_notes = 84
 
 # create a dictionary to store the probabilities
 probabilities = {}
@@ -342,10 +355,10 @@ for i in range(len(states)):
 print("total probabilities: ", total_prob)
 
 # Write to file
-# file1 = open('output_norm_probs_three_large_01.txt', 'w')
-# for i in range(len(normalised_probabilities)):
-#     file1.write(str(normalised_probabilities[i]) + "\n")
-# file1.close()
+file1 = open('15_03_08.txt', 'w')
+for i in range(len(normalised_probabilities)):
+    file1.write(str(normalised_probabilities[i]) + "\n")
+file1.close()
 
 # Create a MIDI file
 midi_file = MidiFile()
@@ -357,8 +370,8 @@ midi_file.tracks.append(track)
 # Before the run these are all the parameters that can be set
 time = 0  # current time in tune
 next_note_temp = 0
-prev_note = 59
-prev_prev_note = 59
+prev_note = 36
+prev_prev_note = 36
 channel = 0
 pitch = 0
 
@@ -378,6 +391,7 @@ for i in range(length):
     time = math.floor(math.sqrt(time))
 
     # duration = choose_timing()
+
     # Generate the next note based on the probabilities
     # next_note_temp = select_next_note(normalised_probabilities, curr_note, notes_allowed)
     next_note_temp = select_next_note_from_two(normalised_probabilities, curr_note, prev_note, notes_allowed, num_notes)
