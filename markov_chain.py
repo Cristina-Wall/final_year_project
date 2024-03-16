@@ -10,14 +10,13 @@ import math
 
 ####################
 # Before the run these are all the parameters that can be set
-save_to_file = "output/15_03_04.mid" # the name and location of the file the song will be saved to
-duration = 50  # in beats - the length of each note
+save_to_file = "output/16_03_04.mid" # the name and location of the file the song will be saved to
 velocity = 100  # the strength of each note (dynamics)
-curr_note = 59  # starting note (middle C)
+curr_note = 36  # starting note (middle C)
 length = 500  # length of song in notes
 chosen_key = "c" # key the song will be in
 chosen_tonality = "major" # tonality of the song
-num_past_notes = 2 # number of past notes to base the probabilities on
+num_past_notes = 1 # number of past notes to base the probabilities on
     # ^ if changing this also have to change what function is called for select_next_note
 tempo = 500000 # tempo of the song
 # length of song in seconds????
@@ -48,7 +47,7 @@ def select_next_note_from_two(input_notes, curr_note, prev_note, notes_allowed, 
     #     prev_note = 60 # do something about this!!! this is here because when prev_note is 127, the index is too high and it doesnt actually exist
     while True:
         # probability_distribution = copy.copy(input_notes[(prev_note * num_notes) + prev_note + curr_note])
-        probability_distribution = copy.copy(input_notes[((num_notes * prev_note)) + curr_note])
+        probability_distribution = copy.copy(input_notes[(prev_note * num_notes) + curr_note])
         cumulative_probabilities = [sum(probability_distribution[:idx+1]) for idx in range(len(probability_distribution))]
         random_value = random.uniform(0, 1)
 
@@ -62,7 +61,7 @@ def select_next_note_from_two(input_notes, curr_note, prev_note, notes_allowed, 
 # Similar to function above but this uses the probabilities based on the three previous notes
 def select_next_note_from_three(input_notes, curr_note, prev_note, prev_prev_note, notes_allowed, num_notes):
     while True:
-        probability_distribution = copy.copy(input_notes[(prev_note * num_notes) + (prev_prev_note * num_notes) + prev_note + prev_prev_note + curr_note])
+        probability_distribution = copy.copy(input_notes[((prev_prev_note * num_notes)^2) + (prev_note * num_notes) + curr_note])
         cumulative_probabilities = [sum(probability_distribution[:idx+1]) for idx in range(len(probability_distribution))]
         random_value = random.uniform(0, 1)
 
@@ -274,7 +273,7 @@ def count_notes_for_probs(states, num_notes, probabilities_array, all_tunes, pro
                     current_note -= 24
                     next_note -= 24
                     next_next_note -= 24
-                    probabilities_note_count[(current_note * num_notes) + current_note + next_note][next_next_note] += 1
+                    probabilities_note_count[(current_note * num_notes) + next_note][next_next_note] += 1
                 else:
                     return probabilities_array, probabilities_note_count
     elif num_past_notes == 3:
@@ -290,7 +289,7 @@ def count_notes_for_probs(states, num_notes, probabilities_array, all_tunes, pro
                     next_note -= 24
                     next_next_note -= 24
                     next_next_next_note -= 24
-                    probabilities_note_count[(current_note * num_notes) + (next_note * num_notes) + next_next_note + current_note + next_note][next_next_next_note] += 1
+                    probabilities_note_count[((current_note * num_notes)^2) + (next_note * num_notes) + next_next_note][next_next_next_note] += 1
                 else:
                     return probabilities_array, probabilities_note_count
     return probabilities_array, probabilities_note_count
@@ -302,16 +301,35 @@ def calculate_norm_probs(probabilities_note_count, probabilities_array, normalis
     # probabilities_note_count.delete()
     return normalised_probabilities
 
-def choose_timing():
-    return randint(60, 240)
+def choose_timing(prev_duration):
+    if random.random() < 0.5:
+        duration = randint(prev_duration - 20, prev_duration + 20)
+    elif random.random() < 0.75:
+        duration = randint(randint(prev_duration - 50, prev_duration - 20), randint(prev_duration + 20, prev_duration + 50))
+    elif random.random() < 0.1:
+        duration = randint(randint(prev_duration - 90, prev_duration - 50), randint(prev_duration + 50, prev_duration + 90))
+    else:
+        duration = randint(randint(prev_duration - 150, prev_duration - 90), randint(prev_duration + 90, prev_duration + 150))
+
+    if duration < 0 or duration > 200:
+        duration = choose_timing(prev_duration)
+    return duration
 
 def find_chord(note):
-    return 0
+    if note < 12:
+        note1 = None
+        note2 = None
+        note3 = None
+    else:
+        note1 = note - 12
+        note2 = note - 8
+        note3 = note - 5
+    return note1, note2, note3
 
 time1 = datetime.datetime.now()
 print("time taken before anything started: ", time1 - start_time)
-directory_path = ["midiFiles/maestro-v3.0.0/2004", "midiFiles/maestro-v3.0.0/2006", "midiFiles/maestro-v3.0.0/2008", "midiFiles/maestro-v3.0.0/2009", "midiFiles/maestro-v3.0.0/2011", "midiFiles/maestro-v3.0.0/2013", "midiFiles/maestro-v3.0.0/2014", "midiFiles/maestro-v3.0.0/2015", "midiFiles/maestro-v3.0.0/2017", "midiFiles/maestro-v3.0.0/2018"]
-# directory_path = ["midiFiles/one_note_melodies"]
+# directory_path = ["midiFiles/maestro-v3.0.0/2004", "midiFiles/maestro-v3.0.0/2006", "midiFiles/maestro-v3.0.0/2008", "midiFiles/maestro-v3.0.0/2009", "midiFiles/maestro-v3.0.0/2011", "midiFiles/maestro-v3.0.0/2013", "midiFiles/maestro-v3.0.0/2014", "midiFiles/maestro-v3.0.0/2015", "midiFiles/maestro-v3.0.0/2017", "midiFiles/maestro-v3.0.0/2018"]
+directory_path = ["midiFiles/one_note_melodies"]
 file_names = get_file_names(directory_path)
 
 time2 = datetime.datetime.now()
@@ -355,10 +373,10 @@ for i in range(len(states)):
 print("total probabilities: ", total_prob)
 
 # Write to file
-file1 = open('15_03_08.txt', 'w')
-for i in range(len(normalised_probabilities)):
-    file1.write(str(normalised_probabilities[i]) + "\n")
-file1.close()
+# file1 = open('15_03_08.txt', 'w')
+# for i in range(len(normalised_probabilities)):
+#     file1.write(str(normalised_probabilities[i]) + "\n")
+# file1.close()
 
 # Create a MIDI file
 midi_file = MidiFile()
@@ -374,6 +392,9 @@ prev_note = 36
 prev_prev_note = 36
 channel = 0
 pitch = 0
+prev_duration = 50
+duration = randint(50, 150)
+chord_pos = 0
 
 notes_allowed = get_allowed_notes(chosen_key, chosen_tonality)
 
@@ -382,22 +403,47 @@ print("time taken to get key and create scale: ", time7 - time6)
 
 track.append(mido.MetaMessage('set_tempo', tempo=tempo, time=0))
 
-for i in range(length):
-    # Add the note to the MIDI file
-    track.append(mido.Message('note_on', note=curr_note, velocity=velocity, time=time))
-    track.append(mido.Message('note_off', note=curr_note, velocity=velocity, time=time+duration))
+# bpm = mido.tempo2bpm(tempo)
+# print("bpm: ", math.floor(bpm))
+# print("curr time: ", math.floor((datetime.datetime.now().microsecond) / 100000))
+# song_start_time = math.floor((datetime.datetime.now().microsecond) / 100000)
+# print("song start time: ", song_start_time)
 
+for i in range(length):
+    if chord_pos%4 == 0:
+        note1, note2, note3 = find_chord(curr_note)
+        if note1 == None:
+            track.append(mido.Message('note_on', note=curr_note, velocity=velocity, time=time))
+            track.append(mido.Message('note_off', note=curr_note, velocity=velocity, time=time+duration))
+        else:
+            track.append(mido.Message('note_on', note=curr_note, velocity=velocity, time=time))
+            track.append(mido.Message('note_on', note=note1, velocity=velocity, time=time))
+            track.append(mido.Message('note_on', note=note2, velocity=velocity, time=time))
+            track.append(mido.Message('note_on', note=note3, velocity=velocity, time=time))
+
+            track.append(mido.Message('note_off', note=curr_note, velocity=velocity, time=time+duration))
+            track.append(mido.Message('note_off', note=note1, velocity=velocity, time=time+duration))
+            track.append(mido.Message('note_off', note=note2, velocity=velocity, time=time+duration))
+            track.append(mido.Message('note_off', note=note3, velocity=velocity, time=time+duration))
+    else:
+        track.append(mido.Message('note_on', note=curr_note, velocity=velocity, time=time))
+        track.append(mido.Message('note_off', note=curr_note, velocity=velocity, time=time+duration))
+
+    # track.append(mido.Message('note_on', note=curr_note, velocity=velocity, time=time))
+    # track.append(mido.Message('note_off', note=curr_note, velocity=velocity, time=time+duration))
+
+    chord_pos += 1
+    prev_duration = duration
+    duration = choose_timing(prev_duration)
     time += duration
     time = math.floor(math.sqrt(time))
 
-    # duration = choose_timing()
-
     # Generate the next note based on the probabilities
-    # next_note_temp = select_next_note(normalised_probabilities, curr_note, notes_allowed)
-    next_note_temp = select_next_note_from_two(normalised_probabilities, curr_note, prev_note, notes_allowed, num_notes)
+    next_note_temp = select_next_note(normalised_probabilities, curr_note, notes_allowed)
+    # next_note_temp = select_next_note_from_two(normalised_probabilities, curr_note, prev_note, notes_allowed, num_notes)
     # next_note_temp = select_next_note_from_three(normalised_probabilities, curr_note, prev_note, prev_prev_note, notes_allowed, num_notes)
 
-    # prev_prev_note = prev_note
+    prev_prev_note = prev_note
     prev_note = curr_note
     curr_note = next_note_temp
 
