@@ -10,7 +10,7 @@ import math
 
 ####################
 # Before the run these are all the parameters that can be set
-save_to_file = "output/16_03_04.mid" # the name and location of the file the song will be saved to
+save_to_file = "output/21_03_01.mid" # the name and location of the file the song will be saved to
 velocity = 100  # the strength of each note (dynamics)
 curr_note = 36  # starting note (middle C)
 length = 500  # length of song in notes
@@ -19,8 +19,8 @@ chosen_tonality = "major" # tonality of the song
 num_past_notes = 1 # number of past notes to base the probabilities on
     # ^ if changing this also have to change what function is called for select_next_note
 tempo = 500000 # tempo of the song
+instrument = 1 # instrument used
 # length of song in seconds????
-# instrument????
 ####################
 
 
@@ -43,10 +43,7 @@ def select_next_note(input_notes, curr_note, notes_allowed):
 
 # Similar to function above but this uses the probabilities based on the two previous notes
 def select_next_note_from_two(input_notes, curr_note, prev_note, notes_allowed, num_notes):
-    # if(prev_note == 127):
-    #     prev_note = 60 # do something about this!!! this is here because when prev_note is 127, the index is too high and it doesnt actually exist
     while True:
-        # probability_distribution = copy.copy(input_notes[(prev_note * num_notes) + prev_note + curr_note])
         probability_distribution = copy.copy(input_notes[(prev_note * num_notes) + curr_note])
         cumulative_probabilities = [sum(probability_distribution[:idx+1]) for idx in range(len(probability_distribution))]
         random_value = random.uniform(0, 1)
@@ -73,6 +70,7 @@ def select_next_note_from_three(input_notes, curr_note, prev_note, prev_prev_not
                     return index
 
 # Function that imports a midi file and removes any duplicate tracks
+# this is not used
 def import_file(file_name):
     mid = MidiFile(file_name, clip=True)
     message_numbers = []
@@ -128,17 +126,19 @@ def get_file_names(directory):
 # Function that gets the allowed notes based on the key and tonality
 # The program will later then only be allowed to select notes from this list
 def get_allowed_notes(key, tonality):
-    scale_of_major_c = make_scale_of_major_c()
-    scale_of_minor_c = make_scale_of_minor_c()
 
     if key == "c" and tonality == "major":
+        scale_of_major_c = make_scale_of_major_c()
         return scale_of_major_c
     elif key == "c" and tonality == "minor":
+        scale_of_minor_c = make_scale_of_minor_c()
         return scale_of_minor_c
     elif tonality == "major":
+        scale_of_major_c = make_scale_of_major_c()
         scale = make_scale(key, scale_of_major_c)
         return scale
     elif tonality == "minor":
+        scale_of_minor_c = make_scale_of_minor_c()
         scale = make_scale(key, scale_of_minor_c)
         return scale
     else:
@@ -294,7 +294,7 @@ def count_notes_for_probs(states, num_notes, probabilities_array, all_tunes, pro
                     return probabilities_array, probabilities_note_count
     return probabilities_array, probabilities_note_count
 
-def calculate_norm_probs(probabilities_note_count, probabilities_array, normalised_probabilities, num_notes, num_past_notes, states):
+def calculate_norm_probs(probabilities_note_count, normalised_probabilities):
     for i in range(len(probabilities_note_count)):
         for j in range(len(probabilities_note_count[i])):
             normalised_probabilities[i][j] = (1 + (probabilities_note_count[i][j]) *100) / (len(probabilities_note_count[i]) + (sum(probabilities_note_count[i])) *100)
@@ -328,8 +328,8 @@ def find_chord(note):
 
 time1 = datetime.datetime.now()
 print("time taken before anything started: ", time1 - start_time)
-# directory_path = ["midiFiles/maestro-v3.0.0/2004", "midiFiles/maestro-v3.0.0/2006", "midiFiles/maestro-v3.0.0/2008", "midiFiles/maestro-v3.0.0/2009", "midiFiles/maestro-v3.0.0/2011", "midiFiles/maestro-v3.0.0/2013", "midiFiles/maestro-v3.0.0/2014", "midiFiles/maestro-v3.0.0/2015", "midiFiles/maestro-v3.0.0/2017", "midiFiles/maestro-v3.0.0/2018"]
-directory_path = ["midiFiles/one_note_melodies"]
+directory_path = ["midiFiles/maestro-v3.0.0/2004", "midiFiles/maestro-v3.0.0/2006", "midiFiles/maestro-v3.0.0/2008", "midiFiles/maestro-v3.0.0/2009", "midiFiles/maestro-v3.0.0/2011", "midiFiles/maestro-v3.0.0/2013", "midiFiles/maestro-v3.0.0/2014", "midiFiles/maestro-v3.0.0/2015", "midiFiles/maestro-v3.0.0/2017", "midiFiles/maestro-v3.0.0/2018"]
+# directory_path = ["midiFiles/one_note_melodies"]
 file_names = get_file_names(directory_path)
 
 time2 = datetime.datetime.now()
@@ -361,7 +361,7 @@ probabilities_array, probabilities_note_count = count_notes_for_probs(states, nu
 time5 = datetime.datetime.now()
 print("time taken to count note occurrences: ", time5 - time4)
 
-normalised_probabilities = calculate_norm_probs(probabilities_note_count, probabilities_array, normalised_probabilities, num_notes, num_past_notes, states)
+normalised_probabilities = calculate_norm_probs(probabilities_note_count, normalised_probabilities)
 
 time6 = datetime.datetime.now()
 print("time taken to calculate normalised probabilities: ", time6 - time5)
@@ -402,7 +402,7 @@ time7 = datetime.datetime.now()
 print("time taken to get key and create scale: ", time7 - time6)
 
 track.append(mido.MetaMessage('set_tempo', tempo=tempo, time=0))
-
+track.append(mido.Message('program_change', program=instrument, time=0))
 # bpm = mido.tempo2bpm(tempo)
 # print("bpm: ", math.floor(bpm))
 # print("curr time: ", math.floor((datetime.datetime.now().microsecond) / 100000))
