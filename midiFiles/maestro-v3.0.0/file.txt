@@ -1,0 +1,132 @@
+Johann Sebastian Bach	French Suite No. 5 in G Major	train	2004	2004/MIDI-Unprocessed_SMF_02_R1_2004_01-05_ORIG_MID--AUDIO_02_R1_2004_05_Track05_wav.midi	968.256759	major	yes	good for melody
+Sergei Rachmaninoff	"Etude-Tableaux, Opus 33 No. 3 in C Minor"	validation	2004	2004/MIDI-Unprocessed_SMF_02_R1_2004_01-05_ORIG_MID--AUDIO_02_R1_2004_06_Track06_wav.midi	267.4383136	minor	not at start	
+Sergei Rachmaninoff	"Etude-Tableaux, Opus 39 No. 8 in D Minor"	test	2004	2004/MIDI-Unprocessed_SMF_02_R1_2004_01-05_ORIG_MID--AUDIO_02_R1_2004_08_Track08_wav.midi	190.8520011	discordant	no	
+Robert Schumann	"Toccata in C Major, Opus 7"	test	2004	2004/MIDI-Unprocessed_SMF_02_R1_2004_01-05_ORIG_MID--AUDIO_02_R1_2004_10_Track10_wav.midi	312.6550606	major	yes	
+Frédéric Chopin	"12 Etudes, Op. 25"	train	2004	2004/MIDI-Unprocessed_SMF_05_R1_2004_01_ORIG_MID--AUDIO_05_R1_2004_02_Track02_wav.midi	1409.288578	major	yes	
+Frédéric Chopin	"12 Etudes, Op. 25"	train	2004	2004/MIDI-Unprocessed_SMF_05_R1_2004_01_ORIG_MID--AUDIO_05_R1_2004_03_Track03_wav.midi	327.3270258	minor/chromatic	not at start	
+Franz Liszt	Mephisto Waltz No. 1	train	2004	2004/MIDI-Unprocessed_SMF_05_R1_2004_02-03_ORIG_MID--AUDIO_05_R1_2004_06_Track06_wav.midi	621.447953	changes	not at start	
+Johannes Brahms	"Sonata in F Minor, Op. 5"	train	2004	2004/MIDI-Unprocessed_SMF_07_R1_2004_01_ORIG_MID--AUDIO_07_R1_2004_02_Track02_wav.midi	477.4953863	minor	possibly	
+Johannes Brahms	"Sonata in F Minor, Op. 5"	train	2004	2004/MIDI-Unprocessed_SMF_07_R1_2004_01_ORIG_MID--AUDIO_07_R1_2004_04_Track04_wav.midi	994.1402297	minor	yes	good for melody
+Johannes Brahms	"Sonata in F Minor, Op. 5"	train	2004	2004/MIDI-Unprocessed_SMF_07_R1_2004_01_ORIG_MID--AUDIO_07_R1_2004_06_Track06_wav.midi	662.2747557	minor	yes	good for melody
+Alexander Scriabin	"Sonata No. 5 in F-sharp Minor, Op. 53"	train	2004	2004/MIDI-Unprocessed_SMF_07_R1_2004_01_ORIG_MID--AUDIO_07_R1_2004_12_Track12_wav.midi	659.8356603	discordant	not at start	
+Wolfgang Amadeus Mozart	"Sonata in F Major, K533"	validation	2004	2004/MIDI-Unprocessed_SMF_12_01_2004_01-05_ORIG_MID--AUDIO_12_R1_2004_03_Track03_wav--1.midi	1139.198478	major	yes	good for melody
+Frédéric Chopin	"Ballade No. 1 in G Minor, Op. 23"	train	2004	2004/MIDI-Unprocessed_SMF_12_01_2004_01-05_ORIG_MID--AUDIO_12_R1_2004_07_Track07_wav.midi	551.6490137	minor	yes	
+Claude Debussy	"Preludes No. 2, 6, 12"	train	2004	2004/MIDI-Unprocessed_SMF_12_01_2004_01-05_ORIG_MID--AUDIO_12_R1_2004_08_Track08_wav.midi	338.2618226	minor	yes	good for melody
+Claude Debussy	"Preludes No. 2, 6, 12"	train	2004	2004/MIDI-Unprocessed_SMF_12_01_2004_01-05_ORIG_MID--AUDIO_12_R1_2004_09_Track09_wav.midi	260.0398312	major	yes	
+Franz Liszt	Mephisto Waltz No. 1	train	2004	2004/MIDI-Unprocessed_SMF_12_01_2004_01-05_ORIG_MID--AUDIO_12_R1_2004_10_Track10_wav.midi	685.2554571	changes	no	
+Johann Sebastian Bach / Ferruccio Busoni	"Chaconne in D Minor, BWV 1004"	train	2004	2004/MIDI-Unprocessed_SMF_13_01_2004_01-05_ORIG_MID--AUDIO_13_R1_2004_02_Track02_wav.midi	832.2924165	minor	yes	
+Ludwig van Beethoven	"15 Variations and Fugue in Eb on an Original Theme ('Eroica Variations'), Op.35"	validation	2004	2004/MIDI-Unprocessed_SMF_13_01_2004_01-05_ORIG_MID--AUDIO_13_R1_2004_05_Track05_wav.midi	1402.554623	minor	not at start	
+Joseph Haydn	"Sonata in C Major, Hob. XVI:50"	train	2004	2004/MIDI-Unprocessed_SMF_13_01_2004_01-05_ORIG_MID--AUDIO_13_R1_2004_08_Track08_wav.midi	301.0984707	major	yes	good for melody
+Joseph Haydn	"Sonata in C Major, Hob. XVI:50"	train	2004	2004/MIDI-Unprocessed_SMF_13_01_2004_01-05_ORIG_MID--AUDIO_13_R1_2004_09_Track09_wav.midi	347.3013259	major	yes	good for melody
+Joseph Haydn	"Sonata in C Major, Hob. XVI:50"	train	2004	2004/MIDI-Unprocessed_SMF_13_01_2004_01-05_ORIG_MID--AUDIO_13_R1_2004_10_Track10_wav.midi	136.2901962	major	yes	
+Sergei Rachmaninoff	Polka de W.R.	validation	2004	2004/MIDI-Unprocessed_SMF_13_01_2004_01-05_ORIG_MID--AUDIO_13_R1_2004_12_Track12_wav.midi	243.3561197	major	yes	good for melody
+Sergei Rachmaninoff	"Prelude in C-sharp Minor, Op. 3, No. 2"	validation	2004	2004/MIDI-Unprocessed_SMF_16_R1_2004_01-08_ORIG_MID--AUDIO_16_R1_2004_02_Track02_wav.midi	231.9170509	minor	yes	
+Sergei Rachmaninoff	"Elegy Op. 3, No. 1"	validation	2004	2004/MIDI-Unprocessed_SMF_16_R1_2004_01-08_ORIG_MID--AUDIO_16_R1_2004_03_Track03_wav.midi	321.4381543	minor	yes	
+Sergei Rachmaninoff	"Humoresque Op. 10, No. 5"	validation	2004	2004/MIDI-Unprocessed_SMF_16_R1_2004_01-08_ORIG_MID--AUDIO_16_R1_2004_04_Track04_wav.midi	217.9245708	major	yes	
+Pyotr Ilyich Tchaikovsky / Sergei Rachmaninoff	"Lullaby Op. 16, No. 1"	train	2004	2004/MIDI-Unprocessed_SMF_16_R1_2004_01-08_ORIG_MID--AUDIO_16_R1_2004_05_Track05_wav.midi	295.2501974	minor	yes	
+Sergei Rachmaninoff	"Polka de ""W.R."""	validation	2004	2004/MIDI-Unprocessed_SMF_16_R1_2004_01-08_ORIG_MID--AUDIO_16_R1_2004_06_Track06_wav.midi	235.4448183	major	yes	good for melody
+Sergei Rachmaninoff	"Sonata No. 2 in B-flat Minor, Opus 36"	train	2004	2004/MIDI-Unprocessed_SMF_16_R1_2004_01-08_ORIG_MID--AUDIO_16_R1_2004_08_Track08_wav.midi	1195.735789	changes	not at start	
+Pyotr Ilyich Tchaikovsky / Mikhail Pletnev	Concert Suite from the Ballet Nutcracker	train	2004	2004/MIDI-Unprocessed_SMF_16_R1_2004_01-08_ORIG_MID--AUDIO_16_R1_2004_13_Track13_wav.midi	969.7642332	major	yes	
+Johann Sebastian Bach	"Prelude & Fugue in G Minor, WTK II"	train	2004	2004/MIDI-Unprocessed_SMF_17_R1_2004_01-02_ORIG_MID--AUDIO_20_R2_2004_02_Track02_wav.midi	311.7255761	major	yes	
+Robert Schumann	"Kreisleriana, Op. 16"	train	2004	2004/MIDI-Unprocessed_SMF_17_R1_2004_01-02_ORIG_MID--AUDIO_20_R2_2004_04_Track04_wav.midi	700.8494282	major	yes	
+Robert Schumann	"Kreisleriana, Op. 16"	train	2004	2004/MIDI-Unprocessed_SMF_17_R1_2004_01-02_ORIG_MID--AUDIO_20_R2_2004_06_Track06_wav.midi	705.8622339	major	yes	
+Franz Schubert	"Impromptus Op. 90, No. 3"	train	2004	2004/MIDI-Unprocessed_SMF_17_R1_2004_01-03_ORIG_MID--AUDIO_17_R1_2004_02_Track02_wav--1.midi	340.5250408	major	yes	
+Ludwig van Beethoven	"Sonata Op. 81 No. 26, 'Les Adieux'"	train	2004	2004/MIDI-Unprocessed_SMF_17_R1_2004_01-03_ORIG_MID--AUDIO_17_R1_2004_02_Track02_wav--2.midi	370.4928427	major	yes	
+Ludwig van Beethoven	"Sonata Op. 81 No. 26, 'Les Adieux'"	train	2004	2004/MIDI-Unprocessed_SMF_17_R1_2004_01-03_ORIG_MID--AUDIO_17_R1_2004_03_Track03_wav.midi	563.9331655	minor	yes	
+Frédéric Chopin	"Ballade No. 1 in G Minor, Op. 23"	train	2004	2004/MIDI-Unprocessed_SMF_17_R1_2004_01-03_ORIG_MID--AUDIO_17_R1_2004_06_Track06_wav.midi	544.937495	major	yes	
+Isaac Albéniz	Triana from 'Iberia'	train	2004	2004/MIDI-Unprocessed_SMF_17_R1_2004_03-06_ORIG_MID--AUDIO_20_R2_2004_08_Track08_wav.midi	259.8165412	discordant	not at start	
+Claude Debussy	"Etude No. 7 ""Study in Chromatic Steps"""	test	2004	2004/MIDI-Unprocessed_SMF_17_R1_2004_03-06_ORIG_MID--AUDIO_20_R2_2004_12_Track12_wav--1.midi	134.3764783	chromatic	not at start	
+Frédéric Chopin	"Ballade No. 1 in G Minor, Op. 23"	train	2004	2004/MIDI-Unprocessed_SMF_17_R1_2004_03-06_ORIG_MID--AUDIO_20_R2_2004_12_Track12_wav--2.midi	516.9707574	minor	yes	
+Frédéric Chopin	"Complete Etudes, Opus 25"	train	2004	2004/MIDI-Unprocessed_SMF_17_R1_2004_04_ORIG_MID--AUDIO_17_R1_2004_09_Track09_wav.midi	1203.888543	major	yes	
+Frédéric Chopin	"Complete Etudes, Opus 25"	train	2004	2004/MIDI-Unprocessed_SMF_17_R1_2004_04_ORIG_MID--AUDIO_17_R1_2004_11_Track11_wav.midi	604.441593	major	not at start	
+Johann Sebastian Bach	French Suite No. 5 in G Major	train	2004	2004/MIDI-Unprocessed_SMF_22_R1_2004_01-04_ORIG_MID--AUDIO_22_R1_2004_03_Track03_wav.midi	792.520098	major	yes	
+Johann Sebastian Bach	French Suite No. 5 in G Major	train	2004	2004/MIDI-Unprocessed_SMF_22_R1_2004_01-04_ORIG_MID--AUDIO_22_R1_2004_05_Track05_wav.midi	130.6075207	major	yes	
+Ludwig van Beethoven	"Sonata in C Major, Op. 53 'Waldstein'"	train	2004	2004/MIDI-Unprocessed_SMF_22_R1_2004_01-04_ORIG_MID--AUDIO_22_R1_2004_10_Track10_wav.midi	804.7454892	minor	not at start	
+Franz Liszt	Dante Sonata	train	2004	2004/MIDI-Unprocessed_SMF_22_R1_2004_01-04_ORIG_MID--AUDIO_22_R1_2004_17_Track17_wav.midi	1005.005582	minor	yes	
+Ludwig van Beethoven	"Sonata in A-flat, Op. 110"	train	2004	2004/MIDI-Unprocessed_XP_01_R1_2004_01-02_ORIG_MID--AUDIO_01_R1_2004_02_Track02_wav.midi	362.7628187	major	yes	good for melody
+Ludwig van Beethoven	"Sonata in A-flat, Op. 110"	train	2004	2004/MIDI-Unprocessed_XP_01_R1_2004_01-02_ORIG_MID--AUDIO_01_R1_2004_03_Track03_wav.midi	732.7841631	major	yes	
+Robert Schumann	"Carnaval, Op. 9"	train	2004	2004/MIDI-Unprocessed_XP_01_R1_2004_03_ORIG_MID--AUDIO_01_R1_2004_04_Track04_wav.midi	1703.207582	major	yes	
+Franz Liszt	"Transcendental Etude No. 9, 'Ricordanza'"	validation	2004	2004/MIDI-Unprocessed_XP_01_R1_2004_04-05_ORIG_MID--AUDIO_01_R1_2004_05_Track05_wav.midi	510.8959288	major	yes	
+Sergei Rachmaninoff	"Sonata No. 2 in B-flat Minor, Op. 36"	train	2004	2004/MIDI-Unprocessed_XP_01_R1_2004_04-05_ORIG_MID--AUDIO_01_R1_2004_06_Track06_wav.midi	649.4190244	minor	yes	
+Johann Sebastian Bach	"Prelude and Fugue in B-Moll, No. 22 WTKII"	test	2004	2004/MIDI-Unprocessed_XP_03_R1_2004_01-02_ORIG_MID--AUDIO_03_R1_2004_01_Track01_wav.midi	420.4496144	major 	yes	
+Modest Mussorgsky	Pictures at an Exhibition	train	2004	2004/MIDI-Unprocessed_XP_03_R1_2004_01-02_ORIG_MID--AUDIO_03_R1_2004_02_Track02_wav.midi	1958.316873	major	yes	good for melody
+Johannes Brahms	"Variations on a Theme by Paganini, Op. 35, Volumes 1 & 2"	train	2004	2004/MIDI-Unprocessed_XP_04_R1_2004_01-02_ORIG_MID--AUDIO_04_R1_2004_01_Track01_wav.midi	1479.741361	major	yes	
+Wolfgang Amadeus Mozart	"Twelve Variations, K179 (189a)"	train	2004	2004/MIDI-Unprocessed_XP_04_R1_2004_01-02_ORIG_MID--AUDIO_04_R1_2004_02_Track02_wav.midi	630.2663031	major	yes	
+Isaac Albéniz	"Iberia, Evocation, Triana"	train	2004	2004/MIDI-Unprocessed_XP_04_R1_2004_03-05_ORIG_MID--AUDIO_04_R1_2004_04_Track04_wav.midi	361.0277811	major	yes	
+Isaac Albéniz	"Iberia, Evocation, Triana"	train	2004	2004/MIDI-Unprocessed_XP_04_R1_2004_03-05_ORIG_MID--AUDIO_04_R1_2004_05_Track05_wav.midi	291.8495664	discordant	not at start	
+Domenico Scarlatti	"Sonata, K239"	test	2004	2004/MIDI-Unprocessed_XP_04_R1_2004_03-05_ORIG_MID--AUDIO_04_R1_2004_06_Track06_wav.midi	196.0154474	major	yes	good for melody
+Mily Balakirev	Islamei	validation	2004	2004/MIDI-Unprocessed_XP_04_R1_2004_06_ORIG_MID--AUDIO_04_R1_2004_08_Track08_wav.midi	530.8574083	major	yes	
+Franz Schubert	"Sonata in G Major, D894"	train	2004	2004/MIDI-Unprocessed_XP_04_R2_2004_01_ORIG_MID--AUDIO_04_R2_2004_01_Track01_wav.midi	1025.036506	major	yes	
+Franz Schubert	"Sonata in G Major, D894"	train	2004	2004/MIDI-Unprocessed_XP_04_R2_2004_01_ORIG_MID--AUDIO_04_R2_2004_02_Track02_wav.midi	1298.327367			
+Frédéric Chopin	"24 Preludes, Op. 28"	train	2004	2004/MIDI-Unprocessed_XP_06_R1_2004_01_ORIG_MID--AUDIO_06_R1_2004_01_Track01_wav.midi	2398.64036			
+Franz Liszt	Spanish Rhapsody	train	2004	2004/MIDI-Unprocessed_XP_06_R1_2004_02-03_ORIG_MID--AUDIO_06_R1_2004_05_Track05_wav.midi	750.325778			
+Franz Schubert	"Sonata in C Minor, D958"	train	2004	2004/MIDI-Unprocessed_XP_06_R2_2004_01_ORIG_MID--AUDIO_06_R2_2004_01_Track01_wav.midi	692.7223154			
+Franz Schubert	"Sonata in C Minor, D958"	train	2004	2004/MIDI-Unprocessed_XP_06_R2_2004_01_ORIG_MID--AUDIO_06_R2_2004_02_Track02_wav.midi	525.6640476			
+Franz Schubert	"Sonata in C Minor, D958"	train	2004	2004/MIDI-Unprocessed_XP_06_R2_2004_01_ORIG_MID--AUDIO_06_R2_2004_03_Track03_wav.midi	745.9379704			15
+George Frideric Handel	Suite No. 3 in D Minor	train	2004	2004/MIDI-Unprocessed_XP_08_R1_2004_01-02_ORIG_MID--AUDIO_08_R1_2004_01_Track01_wav.midi	720.0897561			
+Robert Schumann	"Fantasy Pieces, Op. 12"	train	2004	2004/MIDI-Unprocessed_XP_08_R1_2004_01-02_ORIG_MID--AUDIO_08_R1_2004_02_Track02_wav.midi	1255.957833			
+Claude Debussy	Image (Book II)	train	2004	2004/MIDI-Unprocessed_XP_08_R1_2004_03_ORIG_MID--AUDIO_08_R1_2004_03_Track03_wav.midi	701.103701			
+Sergei Rachmaninoff	"Prelude Op. 23, No. 2"	train	2004	2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_04_Track04_wav.midi	168.511255			
+Sergei Rachmaninoff	"Prelude Op. 32, No. 10"	test	2004	2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--1.midi	287.529574			
+Sergei Rachmaninoff	"Moment Musical, Op. 16, No.4"	train	2004	2004/MIDI-Unprocessed_XP_08_R1_2004_04-06_ORIG_MID--AUDIO_08_R1_2004_05_Track05_wav--2.midi	158.014183			
+Johann Sebastian Bach	"Prelude and Fugue in D Minor, Book II"	validation	2004	2004/MIDI-Unprocessed_XP_09_R1_2004_01-02_ORIG_MID--AUDIO_09_R1_2004_01_Track01_wav.midi	203.7184161			
+Ludwig van Beethoven	"Sonata No. 26 in 3-flat Major, Op. 81a (2nd & 3rd Movements)"	train	2004	2004/MIDI-Unprocessed_XP_09_R1_2004_01-02_ORIG_MID--AUDIO_09_R1_2004_02_Track02_wav.midi	316.5727841			
+Ludwig van Beethoven	"Sonata No. 26 in 3-flat Major, Op. 81a (2nd & 3rd Movements)"	train	2004	2004/MIDI-Unprocessed_XP_09_R1_2004_01-02_ORIG_MID--AUDIO_09_R1_2004_03_Track03_wav.midi	453.3928933			
+Frédéric Chopin	"Sonata No. 3 in B Minor, Op. 58"	train	2004	2004/MIDI-Unprocessed_XP_09_R1_2004_05_ORIG_MID--AUDIO_09_R1_2004_06_Track06_wav.midi	493.142776			
+Frédéric Chopin	"Sonata No. 3 in B Minor, Op. 58"	train	2004	2004/MIDI-Unprocessed_XP_09_R1_2004_05_ORIG_MID--AUDIO_09_R1_2004_07_Track07_wav.midi	154.9867223			
+Frédéric Chopin	"Sonata No. 3 in B Minor, Op. 58"	train	2004	2004/MIDI-Unprocessed_XP_09_R1_2004_05_ORIG_MID--AUDIO_09_R1_2004_08_Track08_wav.midi	768.1355545			
+Johann Sebastian Bach / Ferruccio Busoni	"""Wachet  auf, ruft uns die Stimme' BWV 645"	train	2004	2004/MIDI-Unprocessed_XP_10_R1_2004_01-02_ORIG_MID--AUDIO_10_R1_2004_01_Track01_wav.midi	202.3637193			
+Ludwig van Beethoven	"Eroica Variations, Op. 35"	validation	2004	2004/MIDI-Unprocessed_XP_10_R1_2004_01-02_ORIG_MID--AUDIO_10_R1_2004_02_Track02_wav.midi	1314.696976			
+Frédéric Chopin	"Scherzo No. 4 in E Major, Op. 54"	train	2004	2004/MIDI-Unprocessed_XP_10_R1_2004_03-04_ORIG_MID--AUDIO_10_R1_2004_03_Track03_wav.midi	637.803674			
+Robert Schumann	"Carnaval, Op. 9"	train	2004	2004/MIDI-Unprocessed_XP_10_R1_2004_05_ORIG_MID--AUDIO_10_R1_2004_05_Track05_wav.midi	1443.847236			
+Johann Christian Fischer / Wolfgang Amadeus Mozart	12 Variations on a Theme from a Menuet by Fischer	train	2004	2004/MIDI-Unprocessed_XP_11_R1_2004_01-02_ORIG_MID--AUDIO_11_R1_2004_01_Track01_wav.midi	688.3986102			
+Robert Schumann	"Intermezzi, Opus 4"	test	2004	2004/MIDI-Unprocessed_XP_11_R1_2004_01-02_ORIG_MID--AUDIO_11_R1_2004_02_Track02_wav.midi	1303.547437			
+Pyotr Ilyich Tchaikovsky / Mikhail Pletnev	Concert Suite from the Nutcracker	train	2004	2004/MIDI-Unprocessed_XP_11_R1_2004_03-04_ORIG_MID--AUDIO_11_R1_2004_03_Track03_wav.midi	310.470238			
+Franz Liszt	"Hungarian Rhapsody, No. 12"	validation	2004	2004/MIDI-Unprocessed_XP_11_R1_2004_03-04_ORIG_MID--AUDIO_11_R1_2004_04_Track04_wav.midi	569.2045174			
+Johann Sebastian Bach / Egon Petri	"Sheep May Safely Graze, from Bach's Birthday Cantata"	train	2004	2004/MIDI-Unprocessed_XP_14_R1_2004_01-03_ORIG_MID--AUDIO_14_R1_2004_01_Track01_wav.midi	273.6882952			
+Johannes Brahms	"16 Waltzes, Op. 39"	validation	2004	2004/MIDI-Unprocessed_XP_14_R1_2004_01-03_ORIG_MID--AUDIO_14_R1_2004_03_Track03_wav.midi	1064.859038			
+Wolfgang Amadeus Mozart	"Sonata in F Major, K280"	test	2004	2004/MIDI-Unprocessed_XP_14_R1_2004_04_ORIG_MID--AUDIO_14_R1_2004_04_Track04_wav.midi	245.3155156			
+Wolfgang Amadeus Mozart	"Sonata in F Major, K280"	test	2004	2004/MIDI-Unprocessed_XP_14_R1_2004_04_ORIG_MID--AUDIO_14_R1_2004_05_Track05_wav.midi	241.4704415			
+Wolfgang Amadeus Mozart	"Sonata in F Major, K280"	train	2004	2004/MIDI-Unprocessed_XP_14_R1_2004_04_ORIG_MID--AUDIO_14_R1_2004_06_Track06_wav.midi	114.6962428			
+Franz Schubert	"Sonata in B-flat Major, D960"	train	2004	2004/MIDI-Unprocessed_XP_14_R2_2004_01_ORIG_MID--AUDIO_14_R2_2004_01_Track01_wav.midi	902.3210561			
+Franz Schubert	"Sonata in B-flat Major, D960"	train	2004	2004/MIDI-Unprocessed_XP_14_R2_2004_01_ORIG_MID--AUDIO_14_R2_2004_02_Track02_wav.midi	595.7332853			
+Franz Schubert	"Sonata in B-flat Major, D960"	train	2004	2004/MIDI-Unprocessed_XP_14_R2_2004_01_ORIG_MID--AUDIO_14_R2_2004_03_Track03_wav.midi	225.1916434			
+Franz Schubert	"Sonata in B-flat Major, D960"	train	2004	2004/MIDI-Unprocessed_XP_14_R2_2004_01_ORIG_MID--AUDIO_14_R2_2004_04_Track04_wav.midi	456.3416025			
+Ludwig van Beethoven	Sonata Op. 54 in F Major	train	2004	2004/MIDI-Unprocessed_XP_15_R1_2004_01-02_ORIG_MID--AUDIO_15_R1_2004_01_Track01_wav.midi	534.5165856			
+Johannes Brahms	Variations on a theme by Paganini (Books I & II)	train	2004	2004/MIDI-Unprocessed_XP_15_R1_2004_01-02_ORIG_MID--AUDIO_15_R1_2004_02_Track02_wav.midi	1449.01923			
+Ludwig van Beethoven	"Sonata Op. 31, No. 3 in E-flat Major"	test	2004	2004/MIDI-Unprocessed_XP_15_R1_2004_03_ORIG_MID--AUDIO_15_R1_2004_03_Track03_wav.midi	1118.901614			
+Sergei Rachmaninoff	Sonata No. 2 in B-flat Minor	train	2004	2004/MIDI-Unprocessed_XP_15_R1_2004_04_ORIG_MID--AUDIO_15_R1_2004_04_Track04_wav.midi	1167.499761			
+Franz Schubert	"Sonata in D Major, D850"	train	2004	2004/MIDI-Unprocessed_XP_15_R2_2004_01_ORIG_MID--AUDIO_15_R2_2004_01_Track01_wav.midi	396.0180625			
+Franz Schubert	"Sonata in D Major, D850"	train	2004	2004/MIDI-Unprocessed_XP_15_R2_2004_01_ORIG_MID--AUDIO_15_R2_2004_02_Track02_wav.midi	682.4018331			
+Franz Schubert	"Sonata in D Major, D850"	train	2004	2004/MIDI-Unprocessed_XP_15_R2_2004_01_ORIG_MID--AUDIO_15_R2_2004_03_Track03_wav.midi	351.6399883			
+Franz Schubert	"Sonata in D Major, D850"	train	2004	2004/MIDI-Unprocessed_XP_15_R2_2004_01_ORIG_MID--AUDIO_15_R2_2004_04_Track04_wav.midi	440.9805367			
+Franz Schubert	"Sonata in B-flat Major, D960"	train	2004	2004/MIDI-Unprocessed_XP_16_R2_2004_01_ORIG_MID--AUDIO_16_R2_2004_01_Track01_wav.midi	917.2921658			
+Franz Schubert	"Sonata in B-flat Major, D960"	train	2004	2004/MIDI-Unprocessed_XP_16_R2_2004_01_ORIG_MID--AUDIO_16_R2_2004_02_Track02_wav.midi	572.4566446			
+Franz Schubert	"Sonata in B-flat Major, D960"	train	2004	2004/MIDI-Unprocessed_XP_16_R2_2004_01_ORIG_MID--AUDIO_16_R2_2004_03_Track03_wav.midi	240.9960839			
+Franz Schubert	"Sonata in B-flat Major, D960"	train	2004	2004/MIDI-Unprocessed_XP_16_R2_2004_01_ORIG_MID--AUDIO_16_R2_2004_04_Track04_wav.midi	488.7111651			
+Franz Schubert	"Sonata in G Major, D 894"	train	2004	2004/MIDI-Unprocessed_XP_17_R2_2004_01_ORIG_MID--AUDIO_17_R2_2004_01_Track01_wav.midi	749.2039864			
+Franz Schubert	"Sonata in G Major, D 894"	train	2004	2004/MIDI-Unprocessed_XP_17_R2_2004_01_ORIG_MID--AUDIO_17_R2_2004_02_Track02_wav.midi	417.901545			
+Franz Schubert	"Sonata in G Major, D 894"	train	2004	2004/MIDI-Unprocessed_XP_17_R2_2004_01_ORIG_MID--AUDIO_17_R2_2004_03_Track03_wav.midi	224.2888683			
+Franz Schubert	"Sonata in G Major, D 894"	train	2004	2004/MIDI-Unprocessed_XP_17_R2_2004_01_ORIG_MID--AUDIO_17_R2_2004_04_Track04_wav.midi	506.7762828			
+Franz Schubert / Franz Liszt	"Song Transcriptions: Aufenthalt, Gretchen am Spinnrade, Standchen von Shakespeare, Der Erlkonig"	train	2004	2004/MIDI-Unprocessed_XP_18_R1_2004_01-02_ORIG_MID--AUDIO_18_R1_2004_02_Track02_wav.midi	209.410707			
+Franz Schubert / Franz Liszt	"Song Transcriptions: Aufenthalt, Gretchen am Spinnrade, Standchen von Shakespeare, Der Erlkonig"	test	2004	2004/MIDI-Unprocessed_XP_18_R1_2004_01-02_ORIG_MID--AUDIO_18_R1_2004_03_Track03_wav.midi	189.9214483			
+Franz Schubert / Franz Liszt	"Song Transcriptions: Aufenthalt, Gretchen am Spinnrade, Standchen von Shakespeare, Der Erlkonig"	train	2004	2004/MIDI-Unprocessed_XP_18_R1_2004_01-02_ORIG_MID--AUDIO_18_R1_2004_04_Track04_wav.midi	141.8318466			
+Franz Schubert / Franz Liszt	"Song Transcriptions: Aufenthalt, Gretchen am Spinnrade, Standchen von Shakespeare, Der Erlkonig"	test	2004	2004/MIDI-Unprocessed_XP_18_R1_2004_01-02_ORIG_MID--AUDIO_18_R1_2004_05_Track05_wav.midi	249.1135814			
+Frédéric Chopin	"Sonata in B Minor, Op. 58"	train	2004	2004/MIDI-Unprocessed_XP_18_R1_2004_04_ORIG_MID--AUDIO_18_R1_2004_07_Track07_wav.midi	1442.054507			
+Joseph Haydn	"Sonata in D Major, Hob. XVI:24"	validation	2004	2004/MIDI-Unprocessed_XP_19_R1_2004_01-02_ORIG_MID--AUDIO_19_R1_2004_01_Track01_wav.midi	208.2600694			
+Joseph Haydn	"Sonata in D Major, Hob. XVI:24"	test	2004	2004/MIDI-Unprocessed_XP_19_R1_2004_01-02_ORIG_MID--AUDIO_19_R1_2004_02_Track02_wav.midi	272.1765475			
+Robert Schumann	"Davidsbundlertanze, Op. 6"	validation	2004	2004/MIDI-Unprocessed_XP_19_R1_2004_01-02_ORIG_MID--AUDIO_19_R1_2004_03_Track03_wav.midi	2097.178642			
+Franz Schubert	"Sonata in C Minor, D958"	train	2004	2004/MIDI-Unprocessed_XP_19_R2_2004_01_ORIG_MID--AUDIO_19_R2_2004_01_Track01_wav.midi	452.8287924			
+Franz Schubert	"Sonata in C Minor, D958"	train	2004	2004/MIDI-Unprocessed_XP_19_R2_2004_01_ORIG_MID--AUDIO_19_R2_2004_02_Track02_wav.midi	465.3191401			
+Franz Schubert	"Sonata in C Minor, D958"	train	2004	2004/MIDI-Unprocessed_XP_19_R2_2004_01_ORIG_MID--AUDIO_19_R2_2004_03_Track03_wav.midi	705.4744146			
+Franz Schubert	"Sonata in G Major, D894"	train	2004	2004/MIDI-Unprocessed_XP_20_R2_2004_01_ORIG_MID--AUDIO_20_R1_2004_01_Track01_wav.midi	754.7541837			
+Franz Schubert	"Sonata in G Major, D894"	train	2004	2004/MIDI-Unprocessed_XP_20_R2_2004_01_ORIG_MID--AUDIO_20_R1_2004_02_Track02_wav.midi	433.1782093			
+Franz Schubert	"Sonata in G Major, D894"	train	2004	2004/MIDI-Unprocessed_XP_20_R2_2004_01_ORIG_MID--AUDIO_20_R1_2004_03_Track03_wav.midi	685.9199851			
+Alexander Scriabin	"24 Preludes Op. 11, No. 13-24"	train	2004	2004/MIDI-Unprocessed_XP_21_R1_2004_01_ORIG_MID--AUDIO_21_R1_2004_01_Track01_wav.midi	872.6405881			
+Ludwig van Beethoven	"Sonata in D minor, Op. 31, No. 2"	train	2004	2004/MIDI-Unprocessed_XP_21_R1_2004_02_ORIG_MID--AUDIO_21_R1_2004_02_Track02_wav.midi	497.0669097			
+Ludwig van Beethoven	"Sonata in D minor, Op. 31, No. 2"	train	2004	2004/MIDI-Unprocessed_XP_21_R1_2004_02_ORIG_MID--AUDIO_21_R1_2004_03_Track03_wav.midi	781.7776083			
+Modest Mussorgsky	Pictures at an Exhibition	train	2004	2004/MIDI-Unprocessed_XP_21_R1_2004_03_ORIG_MID--AUDIO_21_R1_2004_04_Track04_wav.midi	1976.930065			
+Franz Schubert	"Sonata in C Minor, D958"	train	2004	2004/MIDI-Unprocessed_XP_22_R2_2004_01_ORIG_MID--AUDIO_22_R2_2004_01_Track01_wav.midi	463.9152981			
+Franz Schubert	"Sonata in C Minor, D958"	train	2004	2004/MIDI-Unprocessed_XP_22_R2_2004_01_ORIG_MID--AUDIO_22_R2_2004_02_Track02_wav.midi	466.2860176			
+Franz Schubert	"Sonata in C Minor, D958"	train	2004	2004/MIDI-Unprocessed_XP_22_R2_2004_01_ORIG_MID--AUDIO_22_R2_2004_03_Track03_wav.midi	152.7377973			
+Franz Schubert	"Sonata in C Minor, D958"	train	2004	2004/MIDI-Unprocessed_XP_22_R2_2004_01_ORIG_MID--AUDIO_22_R2_2004_04_Track04_wav.midi	547.8103498			

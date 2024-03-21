@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+    <title>AI Music Generator</title>
+    <link rel="icon" href="images/favicon.ico" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allura&family=Julius+Sans+One&family=Kalam:wght@300&display=swap" rel="stylesheet">
+    
+</head>
+<body class="container">
+    <header class="header-container">
+        <div class="header-banner-container">
+            <div class="header-title">
+                <div class="h1">AI Music Generator</div>
+            </div>
+        </div>
+        <div class="header-image" id="header-image">
+            <img class="img" src="images/guitars.jpg" alt="header-image">
+        </div>
+    </header>
+    <div class="main-body" id="main-body">
+        <div class="content">
+            <div class="banner" id="banner">Scroll to Generate</div>
+            <div class="param-container">
+                <div class="param">Instrument:<br>
+                    <div class="instruments">
+                        <div class="item" id="piano" onclick="choose_instrument('piano')">
+                            <img class="img instrument" src="images/piano.png" alt="Piano">
+                            <div class="hover-items">
+                                Piano
+                            </div>
+                        </div>
+                        <div class="item" id="clarinet" onclick="choose_instrument('clarinet')">
+                            <img class="img instrument" src="images/clarinet.png" alt="Clarinet">
+                            <div class="hover-items">
+                                Clarinet
+                            </div>
+                        </div>
+                        <div class="item" id="ac_guitar" onclick="choose_instrument('ac_guitar')">
+                            <img class="img instrument" src="images/ac_guitar.png" alt="Acoustic Guitar">
+                            <div class="hover-items">
+                                Acoustic Guitar
+                            </div>
+                        </div>
+                        <div class="item" id="flute" onclick="choose_instrument('flute')">
+                            <img class="img instrument" src="images/flute.png" alt="Flute">
+                            <div class="hover-items">
+                                Flute
+                            </div>
+                        </div>
+                        <div class="item" id="xylophone" onclick="choose_instrument('xylophone')">
+                            <img class="img instrument" src="images/xylophone.png" alt="Xylohphone">
+                            <div class="hover-items">
+                                Xylohphone
+                            </div>
+                        </div>
+                        <div class="item" id="elec_guitar" onclick="choose_instrument('elec_guitar')">
+                            <img class="img instrument" src="images/elec_guitar.png" alt="Electric Guitar">
+                            <div class="hover-items">
+                                Electric Guitar
+                            </div>
+                        </div>
+                        <div class="item" id="saxophone" onclick="choose_instrument('saxophone')">
+                            <img class="img instrument" src="images/saxophone.png" alt="Saxophone">
+                            <div class="hover-items">
+                                Saxophone
+                            </div>
+                        </div>
+                        <div class="item" id="trumpet" onclick="choose_instrument('trumpet')">
+                            <img class="img instrument" src="images/trumpet.png" alt="Trumpet">
+                            <div class="hover-items">
+                                Trumpet
+                            </div>
+                        </div>
+                        <div class="item" id="violin" onclick="choose_instrument('violin')">
+                            <img class="img instrument" src="images/violin.png" alt="Violin">
+                            <div class="hover-items">
+                                Violin
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="param">
+                    <div class="param-header">Tonality:</div>
+                    <div class="tonality-opts" onclick="choose_tonality('major'); document.getElementById('text_minor').style.color='#000'; document.getElementById('text_major').style.color='#F68E5F';">
+                        <div class="item" id="text_major">Major</div>
+                    </div>
+                    <div class="tonality-opts" onclick="choose_tonality('minor'); document.getElementById('text_major').style.color='#000'; document.getElementById('text_minor').style.color='#F68E5F';">
+                        <div class="item" id="text_minor">Minor</div>
+                    </div>
+                </div>
+                <div class="param">
+                    <div class="tempo-heading">Tempo (between 60 and 240 bpm):</div>
+                    <div class="tempo-param">
+                        <input class="tempo-slider" id="tempo-slider" type="range" min='60' max='240' step='1' />
+                        <span class="slider-text" id="slider-text">150</span>
+                    </div>
+                </div>
+                <div class="param">
+                    <div class="length-param">
+                        <div class="param-heading">Length (mins):</div>
+                        <input class="length-input" id="length-input" type="number" min="0.5" max="10" step="0.5">
+                    </div>
+                </div>
+            </div>
+            <div class="generate-button-container">
+                <button class="generate-button" onclick="send_parameters();">Generate Song!</button>
+            </div> 
+        </div>
+    </div>
+    <footer class="footer-container">
+        <div class="content">
+            <div>Cristina Wall Final Year Project, 2023/24 University Of Galway</div>
+        </div>
+    </footer>
+    <script type="text/javascript" src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+	<script type="text/javascript">
+        // Function to change the tempo value on the slider
+		$(function(){
+            $('.tempo-param .tempo-slider').on('mousemove', function(){
+                var getValRange = $(this).val();
+                $('.tempo-param .slider-text').text(getValRange);
+            });
+		});
+	</script>
+</body>
+</html>

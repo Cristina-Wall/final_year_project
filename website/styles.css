@@ -1,0 +1,305 @@
+/*
+colour scheme:
+    #324376: dark blue (background)
+    #212e5a: darker blue (header and footer)
+    #091337: darkest blue (generate button text)
+    #586BA4: light blue
+    #F5DD90: light yellow (scroll text and footer text)
+    #f2e9c7: lightest yellow (used as white)
+    #F68E5F: light orange (header text)
+    #F76C5E: dark orange
+    rgb(174, 174, 174): light grey (scrollbar)
+    rgb(137, 137, 137): medium grey (scrollbar hover)
+    #1c1e27: dark grey (used as black)
+*/
+
+.container {
+    background-color: #324376;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.header-container {
+    .header-banner-container {
+        background-color: #212e5a;
+        width: 100%;
+        height: 60px;
+        top: 0;
+        position: fixed;
+        left: 0;
+        box-shadow: #162145 0px 0px 1px;
+        text-align: center;
+        z-index: 10;
+
+        .header-title {
+            color: #F68E5F;
+            font-size: 40px;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            position: fixed;
+            font-family: "Julius Sans One", sans-serif;
+            font-weight: 600;
+            font-style: normal;
+        }
+    }
+
+    .header-image {
+        width: 100%;
+        max-height: 400px;
+
+        .img {
+            width: 100%;
+            max-height: 500px;
+        }
+
+        &.grow {
+            .img {
+                min-height: 550px;
+            }
+        }
+    }
+}
+
+.main-body {
+    max-width: 80%;
+    left: 30%;
+    position: relative;
+    transform: translateX(-25%);
+    margin-top: 100px;
+}
+
+.main-body .banner {
+    width: 400px;
+    height: 80px;
+    color: #F5DD90;
+    position: relative;
+    left: 50%;
+    top: 50px;
+    transform: translate(-50%, -50%);
+    font-family: "Julius Sans One", sans-serif;
+    font-size: 30px;
+    text-align: center; 
+
+    &.hide {
+        opacity: 0;
+    } 
+}
+
+.param-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: baseline;
+    font-family: "Julius Sans One", sans-serif;
+    font-weight: 600;
+}
+
+.param-container .instruments {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 0.5rem;
+    font-size: 10px;
+    text-align: center;
+}
+
+.param-container .instruments .item {
+    position: relative;
+    color: black;
+}
+
+.param-container .instruments .instrument {
+    max-height: 50px;
+    padding: 10px;
+}
+
+.param-container .instruments .hover-items {
+    width: 100%;
+    height: 100%;
+    background-color: #212e5a;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0;
+    transform: scale(0);
+    transition: all .4s ease-in-out;
+}
+
+.item:hover .hover-items {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.param-container .instruments .selected .hover-items {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.param-container .instruments .generate-button-container {
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+.generate-button {
+    left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+    height: 80px;
+    border-radius: 5px 20px 5px 20px;
+    border: none;
+    width: 300px;
+    font-size: 30px;
+    font-family: "Julius Sans One", sans-serif;
+    background-color: #F5DD90;
+    color: #091337;
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+.param-container .param-header {
+    margin-bottom: 20px;
+}
+
+.param-container .tonality-opts {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    margin-top: 0.5rem;
+    font-size: 14px;
+    text-align: center;
+    padding: 10px;
+
+    &:hover {
+        cursor: pointer;
+        color: #F68E5F;
+    }
+    &:active {
+        color: #F76C5E;
+    }
+}
+
+.param-container {
+    .tempo-heading {
+        margin-bottom: 25px;
+    }
+
+    .tempo-param {
+        font-size: 9px;
+
+        .slider-text {
+            position: absolute;
+            margin-left: 14px;
+            width: 30px;
+            height: 20px;
+            background-color: #1c1e27;
+            color: #f2e9c7;
+            border-radius: 3px;
+            text-align: center;
+            line-height: 21px;
+        }
+        .slider-text:before {
+            content: '';
+            position: absolute;
+            border-right: 9px solid transparent;
+            border-left: 9px solid transparent;
+            border-bottom: 12px solid #1c1e27;
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+        }
+    }
+
+    .tempo-slider {
+        width: 80%;
+        transform: translateY(5px);
+        -webkit-appearance: none;
+        height: 4px;
+        border-radius: 5px;
+        background-color: #ba3950;
+        outline: none;
+    }
+    .tempo-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #a83348;
+    }
+}
+
+.length-param {
+    .param-heading {
+        margin-bottom: 25px;
+    }
+
+    .length-input {
+        width: 80%;
+        height: 40px;
+        border-radius: 5px;
+        border: none;
+        background-color: #1c1e27;
+        color: #f2e9c7;
+        padding-left: 10px;
+    }
+}
+
+.footer-container {
+    background-color: #212e5a;
+    width: 100%;
+    height: 20px;
+    bottom: 0;
+    position: relative;
+    left: 0;
+    text-align: center;
+    z-index: 10;
+
+    .content {
+        color: #F5DD90;
+        font-size: 10px;
+        top: 50%;
+        left: 100%;
+        transform: translate(-100%, -50%);
+        position: relative;
+        font-family: "Julius Sans One", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        padding-right: 10px;
+        width: fit-content;
+    }
+}
+
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(20vh);
+    visibility: hidden;
+    transition: opacity 0.6s ease-out, transform 1.2s ease-out;
+    will-change: opacity, visibility;
+  }
+  .fade-in-section.is-visible {
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+  }
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+    width: 7px;
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: rgb(174, 174, 174); 
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(137, 137, 137); 
+}
