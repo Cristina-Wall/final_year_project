@@ -5,41 +5,19 @@ import mido
 from mido import MidiFile, MidiTrack
 import random
 import os
-# from flask import Flask, render_template, request , jsonify
-
-# app = Flask(__name__,template_folder="templates") 
-
-# @app.route("/") 
-# def hello(): 
-# 	return render_template('index.html') 
-
-# @app.route('/process', methods=['POST']) 
-# def process(): 
-# 	data = request.get_json() # retrieve the data sent from JavaScript 
-# 	# process the data using Python code 
-# 	result = data['value'] * 2
-# 	return jsonify(result=result) # return the result to JavaScript 
-
-# if __name__ == '__main__': 
-# 	app.run(debug=True) 
-
-
-total_notes_in_tunes = 0
-# get start time
-start_time = datetime.datetime.now()
+import ast
+import math
 
 def select_next_note(input_notes, curr_note, notes_allowed):
-    probability_distribution = copy.copy(input_notes[curr_note])
-    cumulative_probabilities = [sum(probability_distribution[:idx+1]) for idx in range(len(probability_distribution))]
-    random_value = random.uniform(0, 1)
+    while True:
+        probability_distribution = copy.copy(input_notes[curr_note])
+        cumulative_probabilities = [sum(probability_distribution[:idx + 1]) for idx in range(len(probability_distribution))]
+        random_value = random.uniform(0, 1)
 
-    # Find the index where the random_value falls in the cumulative probabilities
-    for idx, cumulative_prob in enumerate(cumulative_probabilities):
-        if random_value <= cumulative_prob:
-            if idx in notes_allowed:
-                return idx
-            else:
-                select_next_note(input_notes, curr_note, notes_allowed)
+        # Find the index where the random_value falls in the cumulative probabilities
+        for index, cumulative_prob in enumerate(cumulative_probabilities):
+            if random_value <= cumulative_prob and index in notes_allowed:
+                return index
 
 
 def import_file(file_name):
@@ -76,7 +54,7 @@ def get_notes_from_file(file_name):
 
         mem2=[]
 
-        if i['type'] == 'note_on':
+        if i['type'] == 'note_on' and i['note'] >= 24 and i['note'] < 108:
             mem2.append(i['note'])
             output.append(mem2)
             total_notes += 1
@@ -86,43 +64,26 @@ def get_notes_from_file(file_name):
 
 def get_file_names(directory):
     file_names = []
-    for directory in directory:
-        for filename in os.listdir(directory):
-            if os.path.isfile(os.path.join(directory, filename)):
-                file_names.append(directory + "/" + filename)
+    for dir in directory:
+        for filename in os.listdir(dir):
+            if os.path.isfile(os.path.join(dir, filename)):
+                file_names.append(dir + "/" + filename)
     return file_names
 
-def make_scale_of_c():
-    scale = []
-    for x in range(128):
-        if x % 12 == 0:
-            scale.append(x)
-        elif x % 12 == 2:
-            scale.append(x)
-        elif x % 12 == 4:
-            scale.append(x)
-        elif x % 12 == 5:
-            scale.append(x)
-        elif x % 12 == 7:
-            scale.append(x)
-        elif x % 12 == 9:
-            scale.append(x)
-        elif x % 12 == 11:
-            scale.append(x)
-    return scale
-
 def get_allowed_notes(key, tonality):
-    scale_of_major_c = make_scale_of_major_c()
-    scale_of_minor_c = make_scale_of_minor_c()
 
     if key == "c" and tonality == "major":
+        scale_of_major_c = make_scale_of_major_c()
         return scale_of_major_c
     elif key == "c" and tonality == "minor":
+        scale_of_minor_c = make_scale_of_minor_c()
         return scale_of_minor_c
     elif tonality == "major":
+        scale_of_major_c = make_scale_of_major_c()
         scale = make_scale(key, scale_of_major_c)
         return scale
     elif tonality == "minor":
+        scale_of_minor_c = make_scale_of_minor_c()
         scale = make_scale(key, scale_of_minor_c)
         return scale
     else:
@@ -130,7 +91,8 @@ def get_allowed_notes(key, tonality):
 
 def make_scale_of_major_c():
     scale = []
-    for x in range(128):
+    # The scale of C is made up of notes number 0, 2, 4, 5, 7, 9, 11 in every octave
+    for x in range(84):
         if x % 12 == 0:
             scale.append(x)
         elif x % 12 == 2:
@@ -149,7 +111,8 @@ def make_scale_of_major_c():
 
 def make_scale_of_minor_c():
     scale = []
-    for x in range(128):
+    # The scale of C is made up of notes number 0, 2, 3, 5, 7, 8, 11 in every octave
+    for x in range(84):
         if x % 12 == 0:
             scale.append(x)
         elif x % 12 == 2:
@@ -205,105 +168,218 @@ def make_scale(key, scale_of_c):
         return "invalid key"
     
     removed = 0
-
+    
+    # Remove any notes that are above 128
     for i in range(len(scale) - removed):
-        if scale[i - removed] > 128:
+        if scale[i - removed] > 84:
             scale.remove(scale[i - removed])
             removed += 1
     return scale
 
-directory_path = ["midiFiles/maestro-v3.0.0/2004", "midiFiles/maestro-v3.0.0/2006", "midiFiles/maestro-v3.0.0/2008", "midiFiles/maestro-v3.0.0/2009", "midiFiles/maestro-v3.0.0/2011", "midiFiles/maestro-v3.0.0/2013", "midiFiles/maestro-v3.0.0/2014", "midiFiles/maestro-v3.0.0/2015", "midiFiles/maestro-v3.0.0/2017", "midiFiles/maestro-v3.0.0/2018"]
-# directory_path = "midiFiles/one_note_melodies"
-file_names = get_file_names(directory_path)
+def start_probs(num_notes, num_past_notes):
+    probabilities_array = [[0] * num_notes for _ in range(pow(num_notes, num_past_notes))]
+    normalised_probabilities = [[0] * num_notes for _ in range(pow(num_notes, num_past_notes))]
+    probabilities_note_count = [[0]*num_notes for _ in range(pow(num_notes, num_past_notes))]
+    states = list(range(pow(num_notes, num_past_notes)))
+    return probabilities_array, normalised_probabilities, probabilities_note_count, states
 
-all_tunes = []
+def count_notes_for_probs(states, num_notes, probabilities_array, all_tunes, probabilities_note_count, num_past_notes):
+    for i in range(len(states)):
+        for j in range(num_notes):
+            probabilities_array[i][j] = 100 / len(states) / 100 / num_notes
 
-# import all the midi files
-# mid1 = import_file("midiFiles/one_note_melodies/gravity_falls.mid")
+    if num_past_notes == 1:
+        for tune in all_tunes:
+            for i in range(len(tune)):
+                current_note = tune[i]
 
-# get all the notes from each of the files
-for i in range(len(file_names)):
-    tune, total_notes = get_notes_from_file(file_names[i])
-    all_tunes.append(copy.copy(tune))
-    total_notes_in_tunes += total_notes
+                if i < len(tune) - 1:
+                    next_note = tune[i + 1]
+                    next_note -= 24
+                    current_note -= 24
+                    probabilities_note_count[current_note][next_note] += 1
+                else:
+                    return probabilities_array, probabilities_note_count
+    elif num_past_notes == 2:
+        for tune in all_tunes:
+            for i in range(len(tune)):
+                current_note = tune[i]
 
-# states are all the possible notes on the piano
-states = list(range(0, 128))
-num_notes = 128
+                if i < len(tune) - 2:
+                    next_note = tune[i + 1]
+                    next_next_note = tune[i + 2]
+                    current_note -= 24
+                    next_note -= 24
+                    next_next_note -= 24
+                    probabilities_note_count[(current_note * num_notes) + next_note][next_next_note] += 1
+                else:
+                    return probabilities_array, probabilities_note_count
+    elif num_past_notes == 3:
+        for tune in all_tunes:
+            for i in range(len(tune)):
+                current_note = tune[i]
 
-# create a dictionary to store the probabilities
-probabilities = {}
-probabilities_array = [[0] * num_notes for _ in range(num_notes)]
-normalised_probabilities = [[0] * num_notes for _ in range(num_notes)]
+                if i < len(tune) - 3:
+                    next_note = tune[i + 1]
+                    next_next_note = tune[i + 2]
+                    next_next_next_note = tune[i + 3]
+                    current_note -= 24
+                    next_note -= 24
+                    next_next_note -= 24
+                    next_next_next_note -= 24
+                    probabilities_note_count[((current_note * num_notes)^2) + (next_note * num_notes) + next_next_note][next_next_next_note] += 1
+                else:
+                    return probabilities_array, probabilities_note_count
+    return probabilities_array, probabilities_note_count
 
-for i in range(len(states)):
-    for j in range(len(states)):
-        probabilities_array[i][j] = 100 / len(states) / 100
+def calculate_norm_probs(probabilities_note_count, normalised_probabilities):
+    for i in range(len(probabilities_note_count)):
+        for j in range(len(probabilities_note_count[i])):
+            normalised_probabilities[i][j] = (1 + (probabilities_note_count[i][j]) *100) / (len(probabilities_note_count[i]) + (sum(probabilities_note_count[i])) *100)
+    # probabilities_note_count.delete()
+    return normalised_probabilities
 
-probabilities_note_count = [[0]*num_notes for _ in range(num_notes)]
+def choose_timing(prev_duration):
+    if random.random() < 0.5:
+        duration = randint(prev_duration - 20, prev_duration + 20)
+    elif random.random() < 0.75:
+        duration = randint(randint(prev_duration - 50, prev_duration - 20), randint(prev_duration + 20, prev_duration + 50))
+    elif random.random() < 0.1:
+        duration = randint(randint(prev_duration - 90, prev_duration - 50), randint(prev_duration + 50, prev_duration + 90))
+    else:
+        duration = randint(randint(prev_duration - 150, prev_duration - 90), randint(prev_duration + 90, prev_duration + 150))
 
-# iterate over each note in all tunes
-for tune in all_tunes:
-    for i in range(len(tune)):
-        current_note = tune[i]
+    if duration < 0 or duration > 200:
+        duration = choose_timing(prev_duration)
+    return duration
 
-        if i < len(tune) - 1:
-            next_note = tune[i + 1]
-            probabilities_note_count[current_note - 1][next_note - 1] += 1
+def find_chord(note):
+    if note < 12:
+        note1 = None
+        note2 = None
+        note3 = None
+    else:
+        note1 = note - 12
+        note2 = note - 8
+        note3 = note - 5
+    return note1, note2, note3
+
+
+
+
+
+
+def run_script(input):
+    print("input: ", input)
+
+    ####################
+    # Before the run these are all the parameters that can be set
+    save_to_file = "output/website_1.mid" # the name and location of the file the song will be saved to
+    velocity = 100  # the strength of each note (dynamics)
+    curr_note = 36  # starting note (middle C)
+    length = 500  # length of song in notes
+    chosen_key = "c" # key the song will be in
+    chosen_tonality = "major" # tonality of the song
+    num_past_notes = 1 # number of past notes to base the probabilities on
+        # ^ if changing this also have to change what function is called for select_next_note
+    tempo = 500000 # tempo of the song
+    instrument = 1 # instrument used
+    # length of song in seconds????
+    ####################
+
+    total_notes_in_tunes = 0
+    start_time = datetime.datetime.now()
+    print("start time: ", start_time)
+
+    # directory_path = ["midiFiles/maestro-v3.0.0/2004", "midiFiles/maestro-v3.0.0/2006", "midiFiles/maestro-v3.0.0/2008", "midiFiles/maestro-v3.0.0/2009", "midiFiles/maestro-v3.0.0/2011", "midiFiles/maestro-v3.0.0/2013", "midiFiles/maestro-v3.0.0/2014", "midiFiles/maestro-v3.0.0/2015", "midiFiles/maestro-v3.0.0/2017", "midiFiles/maestro-v3.0.0/2018"]
+    directory_path = ["midiFiles/one_note_melodies"]
+    file_names = get_file_names(directory_path)
+
+    all_tunes = []
+
+    # get all the notes from each of the files
+    for i in range(len(file_names)):
+        tune, total_notes = get_notes_from_file(file_names[i])
+        all_tunes.append(copy.copy(tune))
+        total_notes_in_tunes += total_notes
+
+    num_notes = 84
+
+    probabilities_array, normalised_probabilities, probabilities_note_count, states = start_probs(num_notes, num_past_notes)
+
+    probabilities_array, probabilities_note_count = count_notes_for_probs(states, num_notes, probabilities_array, all_tunes, probabilities_note_count, num_past_notes)
+
+    normalised_probabilities = calculate_norm_probs(probabilities_note_count, normalised_probabilities)
+
+    total_prob = 0
+    for i in range(len(states)):
+        for j in range(num_notes):
+            total_prob += probabilities_array[i][j]
+    
+    # Create a MIDI file
+    midi_file = MidiFile()
+
+    track = MidiTrack()
+    midi_file.tracks.append(track)
+
+    time = 0  # current time in tune
+    next_note_temp = 0
+    prev_note = 36
+    prev_prev_note = 36
+    channel = 0
+    pitch = 0
+    prev_duration = 50
+    duration = randint(50, 150)
+    chord_pos = 0
+
+    notes_allowed = get_allowed_notes(chosen_key, chosen_tonality)
+
+    track.append(mido.MetaMessage('set_tempo', tempo=tempo, time=0))
+    track.append(mido.Message('program_change', program=1, time=0))
+
+    for i in range(length):
+        if chord_pos%4 == 0:
+            note1, note2, note3 = find_chord(curr_note)
+            if note1 == None:
+                track.append(mido.Message('note_on', note=curr_note, velocity=velocity, time=time))
+                track.append(mido.Message('note_off', note=curr_note, velocity=velocity, time=time+duration))
+            else:
+                track.append(mido.Message('note_on', note=curr_note, velocity=velocity, time=time))
+                track.append(mido.Message('note_on', note=note1, velocity=velocity, time=time))
+                track.append(mido.Message('note_on', note=note2, velocity=velocity, time=time))
+                track.append(mido.Message('note_on', note=note3, velocity=velocity, time=time))
+
+                track.append(mido.Message('note_off', note=curr_note, velocity=velocity, time=time+duration))
+                track.append(mido.Message('note_off', note=note1, velocity=velocity, time=time+duration))
+                track.append(mido.Message('note_off', note=note2, velocity=velocity, time=time+duration))
+                track.append(mido.Message('note_off', note=note3, velocity=velocity, time=time+duration))
         else:
-            break
+            track.append(mido.Message('note_on', note=curr_note, velocity=velocity, time=time))
+            track.append(mido.Message('note_off', note=curr_note, velocity=velocity, time=time+duration))
 
-# calculate the probabilities by dividing the counts by the total occurrences of each note
-for i in range(len(probabilities_note_count)):
-    for j in range(len(probabilities_note_count[i])):
-        normalised_probabilities[i][j] = (1 + (probabilities_note_count[i][j] * 3)) / (len(probabilities_note_count[i]) + (sum(probabilities_note_count[i]) * 3))
+        chord_pos += 1
+        prev_duration = duration
+        duration = choose_timing(prev_duration)
+        time += duration
+        time = math.floor(math.sqrt(time))
 
-# Create a MIDI file
-midi_file = MidiFile()
+        # Generate the next note based on the probabilities
+        next_note_temp = select_next_note(normalised_probabilities, curr_note, notes_allowed)
+        prev_note = curr_note
+        curr_note = next_note_temp
 
-# Set the tempo and other MIDI parameters
-track = MidiTrack()
-midi_file.tracks.append(track)
-# track.append(mido.MetaMessage('set_tempo', tempo=500000, time=0))
+    # Save the MIDI file
+    midi_file.save(save_to_file)
 
-# Set the duration and velocity for each note
-duration = 100  # in beats
-velocity = 100  # 0-127
-time = 0  # current time in tune
-curr_note = 59  # starting note
-length = 500  # length of song in notes
-next_note_temp = 0
-chosen_key = "c"
-chosen_tonality = "major"
+    end_time = datetime.datetime.now()
+    print("total time: ", end_time - start_time)
 
-channel = 0
-pitch = 0
+    return "success!!!"
 
-notes_allowed = get_allowed_notes(chosen_key, chosen_tonality)
 
-track.append(mido.MetaMessage('set_tempo', tempo=120, time=0))
+def test_script(input):
+    print("input: ", input)
+    return "success!!!"
 
-for i in range(500):
-    # Add the note to the MIDI file
-    track.append(mido.Message('note_on', note=curr_note, velocity=velocity, time=time))
-    track.append(mido.Message('note_off', note=curr_note, velocity=velocity, time=time+duration))
-    time += duration
-    # Generate the next note based on the probabilities
-    next_note_temp = select_next_note(normalised_probabilities, curr_note, notes_allowed)
-    curr_note = next_note_temp
-
-# print(normalised_probabilities)
-# Save the MIDI file
-midi_file.save("output/output_markov_dataset_01.mid")
-# print(midi_file)
-
-# writing to file
-# file1 = open('output_09_03_dataset04_probs.txt', 'w')
-# for i in range(len(normalised_probabilities)):
-#     file1.write(str(normalised_probabilities[i]) + "\n")
-# file1.close()
-
-# get end time
-end_time = datetime.datetime.now()
-# print the time taken to run the program
-print(end_time - start_time)
+saved_at = test_script("test")
+print("saved at: ", saved_at)
