@@ -71,7 +71,6 @@ def get_file_names(directory):
     return file_names
 
 def get_allowed_notes(key, tonality):
-
     if key == "c" and tonality == "major":
         scale_of_major_c = make_scale_of_major_c()
         return scale_of_major_c
@@ -264,26 +263,46 @@ def find_chord(note):
         note3 = note - 5
     return note1, note2, note3
 
+def get_instrument(instrument):
+    if instrument == "piano":
+        return 1
+    elif instrument == "clarinet":
+        return 72
+    elif instrument == "ac_guitar":
+        return 25
+    elif instrument == "flute":
+        return 74
+    elif instrument == "xylophone":
+        return 14
+    elif instrument == "elec_guitar":
+        return 28
+    elif instrument == "saxophone":
+        return 66
+    elif instrument == "trumpet":
+        return 57
+    elif instrument == "violin":
+        return 41
+    
+    return 0
 
-
-
-
-
-def run_script(input):
-    print("input: ", input)
-
+def make_song(instrument_chosen, tonality_chosen, tempo_chosen, key_chosen):
     ####################
     # Before the run these are all the parameters that can be set
-    save_to_file = "output/website_1.mid" # the name and location of the file the song will be saved to
+    time = datetime.datetime.now()
+    formatted_time = time.strftime("%d_%m_%Y_%H_%M_%S")
+    print(formatted_time)
+
+    save_to_file = "web_output/" + formatted_time + "_" + instrument_chosen + "_" + key_chosen + "_" + tonality_chosen + ".mid" # the name and location of the file the song will be saved to
     velocity = 100  # the strength of each note (dynamics)
     curr_note = 36  # starting note (middle C)
     length = 500  # length of song in notes
-    chosen_key = "c" # key the song will be in
-    chosen_tonality = "major" # tonality of the song
+    chosen_key = key_chosen # key the song will be in
+    chosen_tonality = tonality_chosen # tonality of the song
     num_past_notes = 1 # number of past notes to base the probabilities on
         # ^ if changing this also have to change what function is called for select_next_note
-    tempo = 500000 # tempo of the song
-    instrument = 1 # instrument used
+    # tempo = 500000 # tempo of the song
+    tempo = int(60 * 1000000 / tempo_chosen) # tempo of the song
+    instrument = get_instrument(instrument_chosen) # instrument used
     # length of song in seconds????
     ####################
 
@@ -291,8 +310,8 @@ def run_script(input):
     start_time = datetime.datetime.now()
     print("start time: ", start_time)
 
-    # directory_path = ["midiFiles/maestro-v3.0.0/2004", "midiFiles/maestro-v3.0.0/2006", "midiFiles/maestro-v3.0.0/2008", "midiFiles/maestro-v3.0.0/2009", "midiFiles/maestro-v3.0.0/2011", "midiFiles/maestro-v3.0.0/2013", "midiFiles/maestro-v3.0.0/2014", "midiFiles/maestro-v3.0.0/2015", "midiFiles/maestro-v3.0.0/2017", "midiFiles/maestro-v3.0.0/2018"]
-    directory_path = ["midiFiles/one_note_melodies"]
+    directory_path = ["midiFiles/maestro-v3.0.0/2004", "midiFiles/maestro-v3.0.0/2006", "midiFiles/maestro-v3.0.0/2008", "midiFiles/maestro-v3.0.0/2009", "midiFiles/maestro-v3.0.0/2011", "midiFiles/maestro-v3.0.0/2013", "midiFiles/maestro-v3.0.0/2014", "midiFiles/maestro-v3.0.0/2015", "midiFiles/maestro-v3.0.0/2017", "midiFiles/maestro-v3.0.0/2018"]
+    # directory_path = ["midiFiles/one_note_melodies"]
     file_names = get_file_names(directory_path)
 
     all_tunes = []
@@ -335,7 +354,7 @@ def run_script(input):
     notes_allowed = get_allowed_notes(chosen_key, chosen_tonality)
 
     track.append(mido.MetaMessage('set_tempo', tempo=tempo, time=0))
-    track.append(mido.Message('program_change', program=1, time=0))
+    track.append(mido.Message('program_change', program=instrument, time=0))
 
     for i in range(length):
         if chord_pos%4 == 0:
@@ -374,12 +393,17 @@ def run_script(input):
     end_time = datetime.datetime.now()
     print("total time: ", end_time - start_time)
 
+    return "success!!"
+
+
+
+
+
+def test_script(instrument_chosen, tonality_chosen, length_chosen, tempo_chosen, key_chosen):
+    print("instrument: ", instrument_chosen)
+    print("key: ", key_chosen)
+    print("tonality: ", tonality_chosen)
+    print("length: ", length_chosen)
+    print("tempo: ", tempo_chosen)
     return "success!!!"
 
-
-def test_script(input):
-    print("input: ", input)
-    return "success!!!"
-
-saved_at = test_script("test")
-print("saved at: ", saved_at)

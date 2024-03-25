@@ -7,11 +7,15 @@ var chosen_instrument;
 var chosen_tonality;
 var tonality;
 var tempo;
-var length = 0;
 var key;
 var checked = 0;
 
+function start_functions() {
+  checked = 0;
+}
+
 window.addEventListener("scroll", () => {
+  console.log("Scrolling");
   const currentScroll = window.pageYOffset;
   if (currentScroll <= checkpoint) {
     opacity = 1 - currentScroll / checkpoint;
@@ -30,6 +34,10 @@ function choose_instrument(instrument) {
   chosen_instrument = instrument
 }
 
+function set_instrument(instrument) {
+  this.instrument = instrument
+}
+
 function choose_tonality(tonality) {
   this.tonality = tonality
   chosen_tonality = tonality
@@ -37,28 +45,21 @@ function choose_tonality(tonality) {
 
 function get_tempo() {
   this.tempo = document.getElementById("slider-text").innerHTML;
-  return tempo;
+  return parseInt(tempo, 10);
 }
 
 function set_tempo(tempo) {
   this.tempo = tempo;
 }
 
-function get_length() {
-  this.length = document.getElementById("length-input").value;
-  if (length == null) {
-    length = 0;
-  }
-  return length;
-}
-
-function set_length(length) {
-  this.length = length;
+function get_key() {
+  this.key = document.getElementById("keys").value;
+  return key;
 }
 
 function check_if_all_chosen() {
-  if (chosen_instrument == null || chosen_tonality == null || tempo == null || length == 0) {
-    alert("Please select all parameters.\n\nOtherwise on the next click of the \"Generate\" button, the program will default to: \n\nInstrument: Piano\nTonality: Major\nTempo: 120 bpm\nLength: 1 minute");
+  if (chosen_instrument == null || chosen_tonality == null || tempo == null) {
+    alert("Please select all parameters.\n\nOtherwise on the next click of the \"Generate\" button, the program will default to: \n\nInstrument: Piano\nKey: C Major\nTempo: 120 bpm");
     this.checked = 1;
     return false;
   }
@@ -66,201 +67,95 @@ function check_if_all_chosen() {
 }
 
 function double_check_if_all_chosen() {
-  if (chosen_instrument == null || chosen_tonality == null || tempo == null || length == 0) {
+  if (chosen_instrument == null || chosen_tonality == null || tempo == null) {
     return false;
   }
   return true;
 }
 
 function send_parameters() {
+  console.log("checked: ", this.checked)
   instrument = chosen_instrument;
   tonality = chosen_tonality;
   var instrument_temp = "piano";
   var tonality_temp = "major";
+  var tempo_temp = 120;
   tempo = get_tempo();
-  length = get_length();
-  
+  key = get_key();
+
   if (checked == 0) {
     if (check_if_all_chosen()) {
-      // console.log(instrument);
       var instrument_send = instrument; 
-      $.ajax({ 
-          url: '/process', 
-          type: 'POST', 
-          contentType: 'application/json', 
-          data: JSON.stringify({ 'instrument': instrument_send }), 
-          success: function(response) { 
-              document.getElementById('output').innerHTML = response.result; 
-          }, 
-          error: function(error) { 
-              console.log(error); 
-          } 
-      }); 
-      // console.log(tonality);
       var tonality_send = tonality; 
-      $.ajax({ 
-          url: '/process', 
-          type: 'POST', 
-          contentType: 'application/json', 
-          data: JSON.stringify({ 'tonality': tonality_send }), 
-          success: function(response) { 
-              document.getElementById('output').innerHTML = response.result; 
-          }, 
-          error: function(error) { 
-              console.log(error); 
-          } 
-      }); 
-      // console.log(tempo);
       var tempo_send = tempo; 
-      $.ajax({ 
-          url: '/process', 
-          type: 'POST', 
-          contentType: 'application/json', 
-          data: JSON.stringify({ 'tempo': tempo_send }), 
-          success: function(response) { 
-              document.getElementById('output').innerHTML = response.result; 
-          }, 
-          error: function(error) { 
-              console.log(error); 
-          } 
-      }); 
-      // console.log(length);
-      var length_send = length; 
-      $.ajax({ 
-          url: '/process', 
-          type: 'POST', 
-          contentType: 'application/json', 
-          data: JSON.stringify({ 'length': length_send }), 
-          success: function(response) { 
-              document.getElementById('output').innerHTML = response.result; 
-          }, 
-          error: function(error) { 
-              console.log(error); 
-          } 
-      });
-    }
-    else {
-      set_tempo(120);
-      set_length(1);
+      var key_send = key; 
+
+      console.log("instrument: ", instrument_send);
+      console.log("tonality: ", tonality_send);
+      console.log("tempo: ", tempo_send);
+      console.log("key: ", key_send);
+      
+      alert("The song is being created!\nThis could take up to 15 minutes.");
+
+      fetch('/run-script', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({instrument: instrument_send, tonality: tonality_send, tempo: tempo_send, key: key_send}),
+      })
+      .then(response => response.text())
+      .then(message => alert(message))
+      .catch(error => console.error('Error:', error));
     }
   } else {
     if (double_check_if_all_chosen()) {
-      // console.log(instrument);
       var instrument_send = instrument; 
-      $.ajax({ 
-          url: '/process', 
-          type: 'POST', 
-          contentType: 'application/json', 
-          data: JSON.stringify({ 'instrument': instrument_send }), 
-          success: function(response) { 
-              document.getElementById('output').innerHTML = response.result; 
-          }, 
-          error: function(error) { 
-              console.log(error); 
-          } 
-      });
-      // console.log(tonality);
       var tonality_send = tonality; 
-      $.ajax({ 
-          url: '/process', 
-          type: 'POST', 
-          contentType: 'application/json', 
-          data: JSON.stringify({ 'tonality': tonality_send }), 
-          success: function(response) { 
-              document.getElementById('output').innerHTML = response.result; 
-          }, 
-          error: function(error) { 
-              console.log(error); 
-          } 
-      }); 
-      // console.log(tempo);
       var tempo_send = tempo; 
-      $.ajax({ 
-          url: '/process', 
-          type: 'POST', 
-          contentType: 'application/json', 
-          data: JSON.stringify({ 'tempo': tempo_send }), 
-          success: function(response) { 
-              document.getElementById('output').innerHTML = response.result; 
-          }, 
-          error: function(error) { 
-              console.log(error); 
-          } 
-      });
-      // console.log(length);
-      var length_send = length; 
-      $.ajax({ 
-          url: '/process', 
-          type: 'POST', 
-          contentType: 'application/json', 
-          data: JSON.stringify({ 'length': length_send }), 
-          success: function(response) { 
-              document.getElementById('output').innerHTML = response.result; 
-          }, 
-          error: function(error) { 
-              console.log(error); 
-          } 
-      });
+      var key_send = key; 
+
+      console.log("instrument: ", instrument_send);
+      console.log("tonality: ", tonality_send);
+      console.log("tempo: ", tempo_send);
+      console.log("key: ", key_send);
+
+      alert("The song is being created!\nThis could take up to 15 minutes.");
+
+      fetch('/run-script', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({instrument: instrument_send, tonality: tonality_send, tempo: tempo_send, key: key_send}),
+      })
+      .then(response => response.text())
+      .then(message => alert(message))
+      .catch(error => console.error('Error:', error));
     }
     else {
-      // console.log(instrument_temp);
       var instrument_send = instrument_temp; 
-      $.ajax({ 
-          url: '/process', 
-          type: 'POST', 
-          contentType: 'application/json', 
-          data: JSON.stringify({ 'instrument': instrument_send }), 
-          success: function(response) { 
-              document.getElementById('output').innerHTML = response.result; 
-          }, 
-          error: function(error) { 
-              console.log(error); 
-          } 
-      });
-      // console.log(tonality_temp);
       var tonality_send = tonality_temp; 
-      $.ajax({ 
-          url: '/process', 
-          type: 'POST', 
-          contentType: 'application/json', 
-          data: JSON.stringify({ 'tonality': tonality_send }), 
-          success: function(response) { 
-              document.getElementById('output').innerHTML = response.result; 
-          }, 
-          error: function(error) { 
-              console.log(error); 
-          } 
-      }); 
-      set_tempo(120);
-      // console.log(tempo);
-      var tempo_send = tempo; 
-      $.ajax({ 
-          url: '/process', 
-          type: 'POST', 
-          contentType: 'application/json', 
-          data: JSON.stringify({ 'tempo': tempo_send }), 
-          success: function(response) { 
-              document.getElementById('output').innerHTML = response.result; 
-          }, 
-          error: function(error) { 
-              console.log(error); 
-          } 
-      });
-      set_length(1);
-      // console.log(length);
-      var length_send = length; 
-      $.ajax({ 
-          url: '/process', 
-          type: 'POST', 
-          contentType: 'application/json', 
-          data: JSON.stringify({ 'length': length_send }), 
-          success: function(response) { 
-              document.getElementById('output').innerHTML = response.result; 
-          }, 
-          error: function(error) { 
-              console.log(error); 
-          } 
-      });
+      var tempo_send = tempo_temp; 
+      var key_send = get_key();
+
+      console.log("instrument: ", instrument_send);
+      console.log("tonality: ", tonality_send);
+      console.log("tempo: ", tempo_send);
+      console.log("key: ", key_send);
+      
+      alert("The song is being created!\nThis could take up to 15 minutes.");
+      
+      fetch('/run-script', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({instrument: instrument_send, tonality: tonality_send, tempo: tempo_send, key: key_send}),
+      })
+      .then(response => response.text())
+      .then(message => alert(message))
+      .catch(error => console.error('Error:', error));
     }
   }
 }
