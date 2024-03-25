@@ -143,11 +143,40 @@ colour scheme:
     transform: scale(1);
 }
 
-.param-container .instruments .generate-button-container {
+.generate-button-container {
     margin-top: 30px;
     margin-bottom: 60px;
-    
 }
+
+.generate-button-container.hide {
+    display: none;
+}
+
+/* .download-button-container {
+    margin-top: 30px;
+    margin-bottom: 60px;
+} */
+
+/* .download-button-container.hide {
+    display: none;
+} */
+
+/* .download-button {
+    cursor: pointer;
+    left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+    height: 80px;
+    border-radius: 5px 40px 5px 40px;
+    border: none;
+    width: 340px;
+    font-size: 30px;
+    font-family: "Julius Sans One", sans-serif;
+    background-color: #F5DD90;
+    color: #091337;
+    margin-top: 30px;
+    margin-bottom: 60px;
+} */
 
 .param-container .keys {
     /* background-color: #ba3950; */

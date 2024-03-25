@@ -1,8 +1,6 @@
-# app.py
-
-from flask import Flask, render_template, request
-from markov_chain import test_script
+from flask import Flask, render_template, request, send_file
 from markov_chain import make_song
+import os
 
 app = Flask(__name__)
 
@@ -16,8 +14,12 @@ def run_script():
     tonality = request.json['tonality']
     tempo = request.json['tempo']
     key = request.json['key']
-    make_song(instrument, tonality, tempo, key)
-    return 'Song Complete!'
+
+    # Generate the song file
+    file_name = make_song(instrument, tonality, tempo, key)
+
+    # Send the generated file as a response
+    return send_file(file_name, as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -2,6 +2,8 @@
 const checkpoint = 300;
 var banner = document.getElementById("banner");
 var header_image = document.getElementById("header-image");
+// var generate = document.getElementById("generate-button-container");
+// var download = document.getElementById("download-button-container");
 var instrument;
 var chosen_instrument;
 var chosen_tonality;
@@ -12,6 +14,7 @@ var checked = 0;
 
 function start_functions() {
   checked = 0;
+  // download.classList.add("hide");
 }
 
 window.addEventListener("scroll", () => {
@@ -95,18 +98,32 @@ function send_parameters() {
       console.log("tempo: ", tempo_send);
       console.log("key: ", key_send);
       
+      file_name = instrument_send + "_" + key_send + "_" + tonality_send + ".mid";
+      
       alert("The song is being created!\nThis could take up to 15 minutes.");
 
-      fetch('/run-script', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({instrument: instrument_send, tonality: tonality_send, tempo: tempo_send, key: key_send}),
-      })
-      .then(response => response.text())
-      .then(message => alert(message))
-      .catch(error => console.error('Error:', error));
+      // generate.classList.add("hide");
+      // download.classList.remove("hide");
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/run-script', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.responseType = 'blob';
+
+      xhr.onload = function() {
+        if (this.status === 200) {
+          var blob = this.response;
+          var downloadLink = document.createElement('a');
+          var url = window.URL.createObjectURL(blob);
+          downloadLink.href = url;
+          downloadLink.download = file_name;
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          window.URL.revokeObjectURL(url);
+          document.body.removeChild(downloadLink);
+        }
+      };
+      xhr.send(JSON.stringify({instrument: instrument_send, tonality: tonality_send, tempo: tempo_send, key: key_send}));
     }
   } else {
     if (double_check_if_all_chosen()) {
@@ -120,18 +137,32 @@ function send_parameters() {
       console.log("tempo: ", tempo_send);
       console.log("key: ", key_send);
 
+      file_name = instrument_send + "_" + key_send + "_" + tonality_send + ".mid";
+
       alert("The song is being created!\nThis could take up to 15 minutes.");
 
-      fetch('/run-script', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({instrument: instrument_send, tonality: tonality_send, tempo: tempo_send, key: key_send}),
-      })
-      .then(response => response.text())
-      .then(message => alert(message))
-      .catch(error => console.error('Error:', error));
+      // generate.classList.add("hide");
+      // download.classList.remove("hide");
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/run-script', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.responseType = 'blob';
+
+      xhr.onload = function() {
+        if (this.status === 200) {
+          var blob = this.response;
+          var downloadLink = document.createElement('a');
+          var url = window.URL.createObjectURL(blob);
+          downloadLink.href = url;
+          downloadLink.download = file_name;
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          window.URL.revokeObjectURL(url);
+          document.body.removeChild(downloadLink);
+        }
+      };
+      xhr.send(JSON.stringify({instrument: instrument_send, tonality: tonality_send, tempo: tempo_send, key: key_send}));
     }
     else {
       var instrument_send = instrument_temp; 
@@ -143,19 +174,33 @@ function send_parameters() {
       console.log("tonality: ", tonality_send);
       console.log("tempo: ", tempo_send);
       console.log("key: ", key_send);
+
+      file_name = instrument_send + "_" + key_send + "_" + tonality_send + ".mid";
       
       alert("The song is being created!\nThis could take up to 15 minutes.");
-      
-      fetch('/run-script', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({instrument: instrument_send, tonality: tonality_send, tempo: tempo_send, key: key_send}),
-      })
-      .then(response => response.text())
-      .then(message => alert(message))
-      .catch(error => console.error('Error:', error));
+
+      // generate.classList.add("hide");
+      // download.classList.remove("hide");
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/run-script', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.responseType = 'blob';
+
+      xhr.onload = function() {
+        if (this.status === 200) {
+          var blob = this.response;
+          var downloadLink = document.createElement('a');
+          var url = window.URL.createObjectURL(blob);
+          downloadLink.href = url;
+          downloadLink.download = file_name;
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          window.URL.revokeObjectURL(url);
+          document.body.removeChild(downloadLink);
+        }
+      };
+      xhr.send(JSON.stringify({instrument: instrument_send, tonality: tonality_send, tempo: tempo_send, key: key_send}));
     }
   }
 }

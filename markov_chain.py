@@ -310,8 +310,8 @@ def make_song(instrument_chosen, tonality_chosen, tempo_chosen, key_chosen):
     start_time = datetime.datetime.now()
     print("start time: ", start_time)
 
-    directory_path = ["midiFiles/maestro-v3.0.0/2004", "midiFiles/maestro-v3.0.0/2006", "midiFiles/maestro-v3.0.0/2008", "midiFiles/maestro-v3.0.0/2009", "midiFiles/maestro-v3.0.0/2011", "midiFiles/maestro-v3.0.0/2013", "midiFiles/maestro-v3.0.0/2014", "midiFiles/maestro-v3.0.0/2015", "midiFiles/maestro-v3.0.0/2017", "midiFiles/maestro-v3.0.0/2018"]
-    # directory_path = ["midiFiles/one_note_melodies"]
+    # directory_path = ["midiFiles/maestro-v3.0.0/2004", "midiFiles/maestro-v3.0.0/2006", "midiFiles/maestro-v3.0.0/2008", "midiFiles/maestro-v3.0.0/2009", "midiFiles/maestro-v3.0.0/2011", "midiFiles/maestro-v3.0.0/2013", "midiFiles/maestro-v3.0.0/2014", "midiFiles/maestro-v3.0.0/2015", "midiFiles/maestro-v3.0.0/2017", "midiFiles/maestro-v3.0.0/2018"]
+    directory_path = ["midiFiles/one_note_melodies"]
     file_names = get_file_names(directory_path)
 
     all_tunes = []
@@ -393,17 +393,6 @@ def make_song(instrument_chosen, tonality_chosen, tempo_chosen, key_chosen):
     end_time = datetime.datetime.now()
     print("total time: ", end_time - start_time)
 
-    return "success!!"
+    return save_to_file
 
-
-
-
-
-def test_script(instrument_chosen, tonality_chosen, length_chosen, tempo_chosen, key_chosen):
-    print("instrument: ", instrument_chosen)
-    print("key: ", key_chosen)
-    print("tonality: ", tonality_chosen)
-    print("length: ", length_chosen)
-    print("tempo: ", tempo_chosen)
-    return "success!!!"
-
+make_song("piano", "major", 120, "c")
