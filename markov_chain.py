@@ -292,7 +292,7 @@ def make_song(instrument_chosen, tonality_chosen, tempo_chosen, key_chosen):
     formatted_time = time.strftime("%d_%m_%Y_%H_%M_%S")
     print(formatted_time)
 
-    save_to_file = "web_output/" + formatted_time + "_" + instrument_chosen + "_" + key_chosen + "_" + tonality_chosen + ".mid" # the name and location of the file the song will be saved to
+    save_to_file = "output/" + formatted_time + "_" + instrument_chosen + "_" + key_chosen + "_" + tonality_chosen + ".mid" # the name and location of the file the song will be saved to
     velocity = 100  # the strength of each note (dynamics)
     curr_note = 36  # starting note (middle C)
     length = 500  # length of song in notes
@@ -310,8 +310,8 @@ def make_song(instrument_chosen, tonality_chosen, tempo_chosen, key_chosen):
     start_time = datetime.datetime.now()
     print("start time: ", start_time)
 
-    # directory_path = ["midiFiles/maestro-v3.0.0/2004", "midiFiles/maestro-v3.0.0/2006", "midiFiles/maestro-v3.0.0/2008", "midiFiles/maestro-v3.0.0/2009", "midiFiles/maestro-v3.0.0/2011", "midiFiles/maestro-v3.0.0/2013", "midiFiles/maestro-v3.0.0/2014", "midiFiles/maestro-v3.0.0/2015", "midiFiles/maestro-v3.0.0/2017", "midiFiles/maestro-v3.0.0/2018"]
-    directory_path = ["midiFiles/one_note_melodies"]
+    directory_path = ["midiFiles/maestro-v3.0.0/2004", "midiFiles/maestro-v3.0.0/2006", "midiFiles/maestro-v3.0.0/2008", "midiFiles/maestro-v3.0.0/2009", "midiFiles/maestro-v3.0.0/2011", "midiFiles/maestro-v3.0.0/2013", "midiFiles/maestro-v3.0.0/2014", "midiFiles/maestro-v3.0.0/2015", "midiFiles/maestro-v3.0.0/2017", "midiFiles/maestro-v3.0.0/2018"]
+    # directory_path = ["midiFiles/one_note_melodies"]
     file_names = get_file_names(directory_path)
 
     all_tunes = []
@@ -395,4 +395,3 @@ def make_song(instrument_chosen, tonality_chosen, tempo_chosen, key_chosen):
 
     return save_to_file
 
-make_song("piano", "major", 120, "c")

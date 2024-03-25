@@ -99,7 +99,6 @@ function send_parameters() {
       console.log("key: ", key_send);
       
       file_name = instrument_send + "_" + key_send + "_" + tonality_send + ".mid";
-      
       alert("The song is being created!\nThis could take up to 15 minutes.");
 
       // generate.classList.add("hide");
@@ -165,6 +164,7 @@ function send_parameters() {
       xhr.send(JSON.stringify({instrument: instrument_send, tonality: tonality_send, tempo: tempo_send, key: key_send}));
     }
     else {
+      console.log("1")
       var instrument_send = instrument_temp; 
       var tonality_send = tonality_temp; 
       var tempo_send = tempo_temp; 
@@ -176,31 +176,40 @@ function send_parameters() {
       console.log("key: ", key_send);
 
       file_name = instrument_send + "_" + key_send + "_" + tonality_send + ".mid";
-      
+      console.log("2")
       alert("The song is being created!\nThis could take up to 15 minutes.");
-
+      console.log("3")
       // generate.classList.add("hide");
       // download.classList.remove("hide");
 
       var xhr = new XMLHttpRequest();
+      console.log("4")
       xhr.open('POST', '/run-script', true);
+      console.log("5")
       xhr.setRequestHeader('Content-Type', 'application/json');
+      console.log("6")
       xhr.responseType = 'blob';
+      console.log("7")
 
       xhr.onload = function() {
         if (this.status === 200) {
+          console.log("8")
           var blob = this.response;
           var downloadLink = document.createElement('a');
           var url = window.URL.createObjectURL(blob);
           downloadLink.href = url;
           downloadLink.download = file_name;
+          console.log("9")
           document.body.appendChild(downloadLink);
           downloadLink.click();
           window.URL.revokeObjectURL(url);
           document.body.removeChild(downloadLink);
+          console.log("10")
         }
       };
+      console.log("11")
       xhr.send(JSON.stringify({instrument: instrument_send, tonality: tonality_send, tempo: tempo_send, key: key_send}));
+      console.log("12")
     }
   }
 }
